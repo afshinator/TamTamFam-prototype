@@ -4,5 +4,6 @@
     "waiting-for-permission": "Waiting for permeissions?",
     "we-have-data": "We have data in liveGeoData"
   },
-  "hello": "Hello World"
+  "hello": "Hello World",
+  "status": "Location Status"
 }

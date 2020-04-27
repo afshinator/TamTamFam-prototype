@@ -18,7 +18,7 @@ function AppArea(props) {
     i18n.changeLanguage(code);
   };
 
-  /*
+
   useEffect(()=> {
   // Check to see if we have no idea what their location is:
   // No live geo data, no last location stored, no user-pref object
@@ -29,26 +29,27 @@ function AppArea(props) {
     // so display a message to user if we don't have anything in the error object yet...
     if (liveGeoData.error !== null) {
       // TODO: show something to let user know to enable geolocation...
-      setTxt( t('alert:geolocation:location no idea', 'no idea') )
+      setTxt( t('alert:geolocation:no-idea', 'no idea') )
       console.info(
         "No idea where you are, Please allow geolocation or enter it manually:",
         liveGeoData
       )
     } else {
-      setTxt(t('alert:geolocation:waiting for permission', 'wait permis'))
+      setTxt(t('alert:geolocation:waiting-for-permission', 'wait permis'))
       console.info("waiting for permissions?")
     }
   } else {
-    setTxt( t('alert:geolocation:we have geo data') )
+    setTxt( t('alert:geolocation:we-have-data') )
     console.info("NOW WE HAVE SOME INFO? ", liveGeoData)
   }
   }, [t, liveGeoData, liveGeoData.latitude, lastKnownLocation, userPrefs])
-*/
+
+  const cardTitle = t('alert:status')
 
   return (
     <StyledAppArea>
       <Card></Card>
-      <Card title="Location Status">Location Status{txt}</Card>
+      <Card title={cardTitle}>{txt}</Card>
       <button type="button" disabled={ i18n.language === "es"}
       onClick={() => changeLanguage("es")}>
         {t("translation:es")}
