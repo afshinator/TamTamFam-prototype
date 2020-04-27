@@ -1,15 +1,41 @@
-import React from "react";
+import React, {useEffect} from "react";
 // import logo from "./logo.svg";
 import "./App.css";
 import { useTranslation } from "react-i18next";
-import tw from "twin.macro";
-import styled from "styled-components";
-import {StyledForm, SuccessButton} from "../styles";
 
+import {StyledForm, SuccessButton} from "../styles";
+import useMobileDetect from "use-mobile-detect-hook"
+import useLocalStorage from './../utils/useLocalStorage';
+import useGeolocation from './../utils/useGeolocation';
 
 
 function App() {
   const { t } = useTranslation();
+  const [visitCount, setVisitCount] = useLocalStorage("visitCount")
+  const [lastTimestamp, setLastTimestamp] = useLocalStorage('lastTimestamp')
+  const [lastKnownLocation, setLastKnownLocation] = useLocalStorage('lastKnownLocation')
+  const [lastKnownLocationTimestamp, setLastKnownLocationTimestamp] = useLocalStorage('lastKnownLocationTimestamp')
+  const [previousLocation, setPreviousLocation] = useLocalStorage('previousLocation')
+  const [previousLocationTimestamp, setPreviousLocationTimestamp] = useLocalStorage('previousLocationTimestamp')
+  const [users, setUsers] = useLocalStorage("users")
+  const [userPrefs, setUserPrefs] = useLocalStorage('userPrefs')
+  const detectMobile = useMobileDetect()
+  const liveGeoData = useGeolocation()
+  // const { latitude, longitude, timestamp, accuracy, error } = useGeolocation()
+
+  useEffect(() => {
+    console.info("-----------START effects")
+    if (visitCount === undefined) {
+      console.info("visitCount undef")
+      setVisitCount(1)
+    } else {
+      console.info("visitCount defined: ", visitCount)
+      setVisitCount((v) => v + 1)
+    }
+    setLastTimestamp(Date.now())
+    console.info("-----------END effects")
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
 
   return (
     <div className="App">
