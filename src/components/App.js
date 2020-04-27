@@ -1,16 +1,12 @@
 import React, {useEffect} from "react";
-// import logo from "./logo.svg";
 import "./App.css";
-import { useTranslation } from "react-i18next";
-
-import {StyledForm, SuccessButton} from "../styles";
 import useMobileDetect from "use-mobile-detect-hook"
 import useLocalStorage from './../utils/useLocalStorage';
 import useGeolocation from './../utils/useGeolocation';
+import AppArea from "./AppArea";
 
 
 function App() {
-  const { t } = useTranslation();
   const [visitCount, setVisitCount] = useLocalStorage("visitCount")
   const [lastTimestamp, setLastTimestamp] = useLocalStorage('lastTimestamp')
   const [lastKnownLocation, setLastKnownLocation] = useLocalStorage('lastKnownLocation')
@@ -39,21 +35,15 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>{t("hello", "fallback text uh oh")}</p>
-        <SuccessButton />
-        <StyledForm>
-          <form>
-            <input type="text" placeholder="Full name" />
-            <input type="text" placeholder="Email" />
-            <input type="text" placeholder="Password" />
-            <button>Sign In</button>
-          </form>
-        </StyledForm>
-      </header>
+      <AppArea 
+        visitCount={visitCount}
+        lastTimestamp={lastTimestamp}
+        lastKnownLocation={lastKnownLocation}
+        detectMobile={detectMobile}
+        liveGeoData={liveGeoData}
+        users={users}
+        userPrefs={userPrefs}
+      />
     </div>
   );
 }

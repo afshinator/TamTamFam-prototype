@@ -1,3 +1,8 @@
 {
+  "alert": {
+    "location no idea": "No idea where you are, Please allow geolocation or enter it manually",
+    "waiting for permission": "Waiting for permeissions?",
+    "we have geo data": "We have data in liveGeoData",
+  },
   "hello": "Hello World"
 }
