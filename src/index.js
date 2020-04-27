@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import 'tailwindcss/dist/base.css'
 import "./assets/styles.css"

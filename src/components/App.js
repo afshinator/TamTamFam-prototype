@@ -1,10 +1,10 @@
 import React from "react";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
 import { useTranslation } from "react-i18next";
 import tw from "twin.macro";
 import styled from "styled-components";
-import {StyledForm, SuccessButton} from "./styles";
+import {StyledForm, SuccessButton} from "../styles";
 
 
 
@@ -14,7 +14,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
