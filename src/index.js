@@ -1,14 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React, { Suspense } from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import 'tailwindcss/dist/base.css'
+import "./assets/styles.css"
+
+/* TODO:
+All translation files are loaded asynchronously to your React application. 
+In this example, while we wait for the translation files, we render just nothing. 
+Tto provide a fallback component, for example a loading indicator, use the fallback property 
+of the Suspense component.
+*/
+import './i18n';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Suspense fallback={null}>
+      <App />
+    </Suspense>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
