@@ -1,20 +1,23 @@
-import React, {useEffect} from "react";
-import "./App.css";
+import React, { useEffect } from "react"
+import "./App.css"
 import useMobileDetect from "use-mobile-detect-hook"
-import useLocalStorage from './../utils/useLocalStorage';
-import useGeolocation from './../utils/useGeolocation';
-import AppArea from "./AppArea";
-
+import useLocalStorage from "./../utils/useLocalStorage"
+import useGeolocation from "./../utils/useGeolocation"
+import AppArea from "./AppArea"
 
 function App() {
   const [visitCount, setVisitCount] = useLocalStorage("visitCount")
-  const [lastTimestamp, setLastTimestamp] = useLocalStorage('lastTimestamp')
-  const [lastKnownLocation, setLastKnownLocation] = useLocalStorage('lastKnownLocation')
-  const [lastKnownLocationTimestamp, setLastKnownLocationTimestamp] = useLocalStorage('lastKnownLocationTimestamp')
-  const [previousLocation, setPreviousLocation] = useLocalStorage('previousLocation')
-  const [previousLocationTimestamp, setPreviousLocationTimestamp] = useLocalStorage('previousLocationTimestamp')
+  const [lastTimestamp, setLastTimestamp] = useLocalStorage("lastTimestamp")
+  const [lastKnownLocation, setLastKnownLocation] = useLocalStorage("lastKnownLocation")
+  const [lastKnownLocationTimestamp, setLastKnownLocationTimestamp] = useLocalStorage(
+    "lastKnownLocationTimestamp"
+  )
+  const [previousLocation, setPreviousLocation] = useLocalStorage("previousLocation")
+  const [previousLocationTimestamp, setPreviousLocationTimestamp] = useLocalStorage(
+    "previousLocationTimestamp"
+  )
   const [users, setUsers] = useLocalStorage("users")
-  const [userPrefs, setUserPrefs] = useLocalStorage('userPrefs')
+  const [userPrefs, setUserPrefs] = useLocalStorage("userPrefs")
   const detectMobile = useMobileDetect()
   const liveGeoData = useGeolocation()
   // const { latitude, longitude, timestamp, accuracy, error } = useGeolocation()
@@ -32,10 +35,9 @@ function App() {
     console.info("-----------END effects")
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-
   return (
     <div className="App">
-      <AppArea 
+      <AppArea
         visitCount={visitCount}
         lastTimestamp={lastTimestamp}
         lastKnownLocation={lastKnownLocation}
@@ -45,7 +47,7 @@ function App() {
         userPrefs={userPrefs}
       />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
