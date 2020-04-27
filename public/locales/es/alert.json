@@ -1,0 +1,8 @@
+{
+  "geolocation": {
+    "no-idea": "No tengo idea de dónde estás, permite la geolocalización o ingrésala manualmente",
+    "waiting-for-permission": "Esperando permeissions?",
+    "we-have-data": "Tenemos datos en liveGeoData"
+  },
+  "hello": "Hola Whilred"
+}
