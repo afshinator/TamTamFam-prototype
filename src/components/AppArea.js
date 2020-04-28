@@ -6,7 +6,10 @@ import Login from "./Auth/Login"
 import ForgotPassword from "./Auth/ForgotPassword"
 import Card from "./Card"
 import Navi from "./Navi"
+import AppTitle from "./AppTitle"
 import { Button } from "../styles"
+
+
 export const StyledAppArea = styled.main`
   height: 100vh;
 `
@@ -53,8 +56,8 @@ function AppArea(props) {
   return (
     <BrowserRouter>
       <StyledAppArea>
+        <AppTitle />
         <Navi />
-        <Card></Card>
         <Card title={cardTitle}>{txt}</Card>
         <Card title={"flip language"}>
           <Button

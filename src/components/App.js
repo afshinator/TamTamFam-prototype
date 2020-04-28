@@ -1,8 +1,21 @@
 import React, { useEffect } from "react"
+import { createGlobalStyle } from "styled-components"
+import DancingScript from "../assets/DancingScript-Regular.ttf"
+import Allerta from "../assets/Allerta-Regular.ttf"
 import useMobileDetect from "use-mobile-detect-hook"
 import useLocalStorage from "./../utils/useLocalStorage"
 import useGeolocation from "./../utils/useGeolocation"
 import AppArea from "./AppArea"
+
+const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: "Allerta-Regular";
+    src: url(${Allerta});
+  }
+  body {
+    font-family: "Allerta-Regular";
+  }
+`
 
 function App() {
   const [visitCount, setVisitCount] = useLocalStorage("visitCount")
@@ -22,20 +35,17 @@ function App() {
   // const { latitude, longitude, timestamp, accuracy, error } = useGeolocation()
 
   useEffect(() => {
-    console.info("-----------START effects")
     if (visitCount === undefined) {
-      console.info("visitCount undef")
       setVisitCount(1)
     } else {
-      console.info("visitCount defined: ", visitCount)
       setVisitCount((v) => v + 1)
     }
     setLastTimestamp(Date.now())
-    console.info("-----------END effects")
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <React.Fragment>
+      <GlobalStyle />
       <AppArea
         visitCount={visitCount}
         lastTimestamp={lastTimestamp}

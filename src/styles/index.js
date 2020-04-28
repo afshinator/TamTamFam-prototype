@@ -3,6 +3,11 @@ import styled from "styled-components"
 // import tw from "tailwind.macro"
 import tw from 'twin.macro'
 
+export const COLORS = {
+  "TITLE_YELLOW" : "#f4d03f",
+  
+}
+
 export const Btn = tw.button`text-lg bg-gray-300 px-8 py-2 rounded`;
 export const Button = (kids) => <Btn {...kids}>{kids.children}</Btn>
 export const SuccessButton = () => <Btn>Success</Btn>;
