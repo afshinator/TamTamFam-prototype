@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
+import { useLocation } from 'react-router-dom'
 import styled from "styled-components"
 import { useTranslation } from "react-i18next"
 import Login from "./Auth/Login"
@@ -8,7 +9,6 @@ import Card from "./Card"
 import Navi from "./Navi"
 import AppTitle from "./AppTitle"
 import { Button } from "../styles"
-
 
 export const StyledAppArea = styled.main`
   height: 100vh;
@@ -19,6 +19,7 @@ function AppArea(props) {
   const { lastKnownLocation, liveGeoData, userPrefs } = props
   const [txt, setTxt] = useState("")
 
+  // console.log(browserLocation)
   console.log("AppArea props ", props)
   console.info("language: ", i18n.language)
 

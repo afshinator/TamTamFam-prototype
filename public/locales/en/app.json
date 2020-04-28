@@ -1,3 +1,9 @@
 {
-  "siteSubTitle" : "Online network for the dance and drum community"
+  "siteSubTitle" : "Online network for the dance and drum community",
+  "auth" : {
+    "login" : "Login",
+    "createAccount" : "Create Account",
+    "name": "Name",
+    "email": "Email"
+  }
 }

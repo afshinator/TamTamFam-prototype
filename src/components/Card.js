@@ -1,14 +1,18 @@
 import React from "react"
 import styled from "styled-components"
+import tw from "twin.macro"
 
+const Fade = styled.div`
+transition: background 1.5s linear
+`
 const Card = (props) => {
   return (
-    <div className="flex max-w-md p-3 m-6 bg-orange-100">
+    <Fade className="flex max-w-md p-3 m-6 bg-orange-100">
       <div className="w-full">
         <h1 className="text-2xl leading-tight text-blue-700">{props.title || "Generic card"}</h1>
         <div className="flex justify-between">{props.children}</div>
       </div>
-    </div>
+    </Fade>
   )
 }
 
