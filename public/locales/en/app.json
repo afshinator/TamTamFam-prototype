@@ -4,6 +4,15 @@
     "login" : "Login",
     "createAccount" : "Create Account",
     "name": "Name",
-    "email": "Email"
+    "email": "Email",
+    "password": "Password",
+    "choosePw": "Choose a secure password",
+    "needAccount": "Need to create an account?",
+    "haveAccount": "Already have an account?"
+  },
+  "btn" : {
+    "ok" : "ok",
+    "cancel" : "Cancel",
+    "submit": "Submit"
   }
 }

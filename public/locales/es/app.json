@@ -1,3 +1,18 @@
 {
-  "siteSubTitle" : "Red en línea para la comunidad de baile y tambores"
+  "siteSubTitle" : "Red en línea para la comunidad de baile y tambores",
+  "auth": {
+    "login" : "Iniciar sesión",
+    "createAccount" : "Crear cuenta",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "choosePw": "Elija una contraseña segura",
+    "needAccount": "Necesita crear una cuenta?",
+    "haveAccount": "¿Ya tiene una cuenta?"
+  },
+  "btn" : {
+    "ok" : "Bien",
+    "cancel" : "Cancelar",
+    "submit": "Enviar"
+  }
 }

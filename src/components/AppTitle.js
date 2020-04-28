@@ -21,7 +21,7 @@ const AppTitle = (props) => {
   })
   
   useEffect(()=>{
-    setTimeout(()=>{ setToggle(true) }, 2000)
+    setTimeout(()=>{ setToggle(true) }, 500)
   }, [])
 
   return (
