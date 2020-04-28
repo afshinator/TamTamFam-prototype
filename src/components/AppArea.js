@@ -3,10 +3,10 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
 import styled from "styled-components"
 import { useTranslation } from "react-i18next"
 import Login from "./Auth/Login"
-import ForgotPassword from "./Auth/ForgotPassword";
+import ForgotPassword from "./Auth/ForgotPassword"
 import Card from "./Card"
 import Navi from "./Navi"
-
+import { Button } from "../styles"
 export const StyledAppArea = styled.main`
   height: 100vh;
 `
@@ -56,20 +56,23 @@ function AppArea(props) {
         <Navi />
         <Card></Card>
         <Card title={cardTitle}>{txt}</Card>
-        <button
-          type="button"
-          disabled={i18n.language === "es"}
-          onClick={() => changeLanguage("es")}
-        >
-          {t("translation:es")}
-        </button>
-        <button
-          type="button"
-          disabled={i18n.language === "en"}
-          onClick={() => changeLanguage("en")}
-        >
-          {t("translation:en")}
-        </button>
+        <Card title={"flip language"}>
+          <Button
+            type="button"
+            disabled={i18n.language === "es"}
+            onClick={() => changeLanguage("es")}
+          >
+            {t("translation:es")}
+          </Button>
+          <Button
+            type="button"
+            disabled={i18n.language === "en"}
+            onClick={() => changeLanguage("en")}
+          >
+            {t("translation:en")}
+          </Button>
+        </Card>
+
         <h1>{t("alert:hello", "wtf")}</h1>
         {/* <p>{t('alert:content.text', 'Welcome here.')}</p> */}
         <div>

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react"
-import "./App.css"
 import useMobileDetect from "use-mobile-detect-hook"
 import useLocalStorage from "./../utils/useLocalStorage"
 import useGeolocation from "./../utils/useGeolocation"
@@ -36,7 +35,7 @@ function App() {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="App">
+    <React.Fragment>
       <AppArea
         visitCount={visitCount}
         lastTimestamp={lastTimestamp}
@@ -46,7 +45,7 @@ function App() {
         users={users}
         userPrefs={userPrefs}
       />
-    </div>
+    </React.Fragment>
   )
 }
 

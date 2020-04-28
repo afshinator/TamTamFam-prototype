@@ -3,16 +3,18 @@ import styled from "styled-components"
 // import tw from "tailwind.macro"
 import tw from 'twin.macro'
 
-const Button = tw.button`text-lg bg-gray-300 px-8 py-2 rounded`;
-export const SuccessButton = () => <Button>Success</Button>;
+export const Btn = tw.button`text-lg bg-gray-300 px-8 py-2 rounded`;
+export const Button = (kids) => <Btn {...kids}>{kids.children}</Btn>
+export const SuccessButton = () => <Btn>Success</Btn>;
 
+/*
 export const FullPageContainer = styled.main`
   height: 100vh;
   background:url(${img}) no-repeat center center fixed;
   background-size: cover;
   overflow: hidden;
 `
-
+*/
 
 export const StyledForm = styled.main.attrs({
   className: "flex flex-col justify-center items-center bg-gray-100",
