@@ -1,13 +1,50 @@
-import React from "react"
+import React, { useState, useRef, useEffect } from "react"
+import { useSpring, animated } from "react-spring"
+import pointUp from "../assets/arrow-thick-to-top.svg"
+
+const ToggleHeightButton = () => {
+  return (
+    <div className="absolute top-0 left-0">
+      <img src={pointUp} className="" alt="collapse me" />
+    </div>
+  )
+}
 
 const Card = (props) => {
+  const [collapsed, setCollapsed] = useState(false)
+  const [height, setHeight] = useState(null)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (ref.current) {
+      setHeight(ref.current.offsetHeight)
+    }
+    console.log("->>", height)
+  }, [ref.current])
+
+  const collapseStyleProps = useSpring({
+    opacity: 1, from: {opacity: 0}
+  })
+
   return (
-    <section className="flex max-w-md p-3 m-6">
+    <animated.section
+      className="relative max-w-md p-3 m-6 overflow-hidden bg-orange-300 opacity-0"
+      style={collapseStyleProps}
+      ref={ref}
+    >
       <div className="w-full">
-        <h1 className="text-2xl leading-tight text-blue-700">{props.title || "Generic card"}</h1>
+        <h1
+          className="text-2xl text-blue-700"
+          onClick={() => {
+            setCollapsed(!collapsed)
+          }}
+        >
+          {props.title}
+        </h1>
         <div className="">{props.children}</div>
       </div>
-    </section>
+      <ToggleHeightButton />
+    </animated.section>
   )
 }
 

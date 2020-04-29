@@ -17,6 +17,11 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+/* Encloses the application, 
+    gets localStorage values, updates some of them,
+    sets global css,
+    encloses AppArea and passes localStorage data to it.
+*/
 function App() {
   const [visitCount, setVisitCount] = useLocalStorage("visitCount")
   const [lastTimestamp, setLastTimestamp] = useLocalStorage("lastTimestamp")

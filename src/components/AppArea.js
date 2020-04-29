@@ -8,11 +8,16 @@ import Card from "./Card"
 import Navi from "./Navi"
 import AppTitle from "./AppTitle"
 import { Button } from "../styles"
-
+import LanguageSwitcher from './LaungageSwitcher';
 export const StyledAppArea = styled.main`
   height: 100vh;
 `
-
+/* AppArea contains
+    the routes, 
+    the navigation links at top to switch routes,
+    AppTitle,
+    LanguageSwitcher,
+*/
 function AppArea(props) {
   const { t, i18n } = useTranslation(["translation", "alert"])
   const { lastKnownLocation, liveGeoData, userPrefs } = props
@@ -59,26 +64,8 @@ function AppArea(props) {
         <AppTitle />
         <Navi />
         <Card title={cardTitle}>{txt}</Card>
-        <Card title={"change language"}>
-          <Button
-            type="button"
-            disabled={i18n.language === "es"}
-            onClick={() => changeLanguage("es")}
-            className="mr-2"
-          >
-            {t("translation:es")}
-          </Button>
-          <Button
-            type="button"
-            disabled={i18n.language === "en"}
-            onClick={() => changeLanguage("en")}
-          >
-            {t("translation:en")}
-          </Button>
-        </Card>
-
+        <LanguageSwitcher />
         <h1>{t("alert:hello", "wtf")}</h1>
-        {/* <p>{t('alert:content.text', 'Welcome here.')}</p> */}
         <div>
           <Switch>
             <Route path="/login" component={Login} />

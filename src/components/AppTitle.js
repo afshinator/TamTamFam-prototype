@@ -13,11 +13,11 @@ const SubTitle = tw(StyleSiteSubtitle)`ml-4`
 
 const AppTitle = (props) => {
   const [toggle, setToggle] = useState(false)
-  const { t, i18n } = useTranslation(["app"])
+  const { t } = useTranslation(["app"])
 
   const contentProps = useSpring({
     opacity: toggle ? 0.9 : 0,
-    marginTop: toggle ? 0 : -500,
+    marginTop: toggle ? 25 : -500,
   })
   
   useEffect(()=>{
@@ -28,7 +28,8 @@ const AppTitle = (props) => {
     <animated.div className="absolute top-0 right-0 w-auto max-w-md select-none"
       style={contentProps}
     >
-      <img src={titleImg} alt={"TamTamFam Website"} />
+      <img src={titleImg} alt={"TamTamFam Website"} 
+      />
       <SubTitle className="ml-4">{t("app:siteSubTitle", "Dance and Drum Network")}</SubTitle>
     </animated.div>
 
