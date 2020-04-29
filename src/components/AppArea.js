@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
-import { useLocation } from 'react-router-dom'
 import styled from "styled-components"
 import { useTranslation } from "react-i18next"
 import Login from "./Auth/Login"
@@ -20,8 +19,8 @@ function AppArea(props) {
   const [txt, setTxt] = useState("")
 
   // console.log(browserLocation)
-  console.log("AppArea props ", props)
-  console.info("language: ", i18n.language)
+  // console.log("AppArea props ", props)
+  // console.info("language: ", i18n.language)
 
   const changeLanguage = (code) => {
     i18n.changeLanguage(code)
@@ -60,11 +59,12 @@ function AppArea(props) {
         <AppTitle />
         <Navi />
         <Card title={cardTitle}>{txt}</Card>
-        <Card title={"flip language"}>
+        <Card title={"change language"}>
           <Button
             type="button"
             disabled={i18n.language === "es"}
             onClick={() => changeLanguage("es")}
+            className="mr-2"
           >
             {t("translation:es")}
           </Button>

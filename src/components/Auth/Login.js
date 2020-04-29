@@ -4,18 +4,18 @@ import Card from "./../Card"
 import useFormValidation from "./../../utils/useFormValidation"
 import validateLogin from "./../../utils/validateLogin"
 
+const ERROR = "text-red-600"
+const PLACEHOLDER = <p className="p-3"></p>
+
 const INITIAL_STATE = {
   name: "",
   email: "",
   password: "",
 }
 
-const ERROR = "text-red-600"
-const PLACEHOLDER = <p className="p-3"></p>
-
 // Login is both the Login and the Create Account form - for now
 function Login(props) {
-  const { t, i18n } = useTranslation(["app"])
+  const { t } = useTranslation(["app"])
   const loginTxt = t("app:auth:login", "Login")
   const createAcctTxt = t("app:auth:createAccount", "Create Account")
   const nameTxt = t("app:auth:name", "Name")
@@ -59,7 +59,7 @@ function Login(props) {
           autoComplete="off"
         />
         {errors.email ? <p className={ERROR}>{errors.email}</p> : PLACEHOLDER}
- 
+
         <input
           onChange={handleChange}
           onBlur={handleBlur}
@@ -69,7 +69,7 @@ function Login(props) {
           name="password"
           placeholder={choosePwTxt}
         />
-        {errors.password ? <p className={ERROR}>{errors.password}</p> :PLACEHOLDER}
+        {errors.password ? <p className={ERROR}>{errors.password}</p> : PLACEHOLDER}
         <button
           type="submit"
           className="p-2 mt-5 mr-2 pointer"
