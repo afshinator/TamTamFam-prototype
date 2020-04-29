@@ -8,7 +8,11 @@
     "password": "Password",
     "choosePw": "Choose a secure password",
     "needAccount": "Need to create an account?",
-    "haveAccount": "Already have an account?"
+    "haveAccount": "Already have an account?",
+    "invalidEmail": "Invalid email address",
+    "emailRequired": "Email is required",
+    "pwRequired": "Password is required",
+    "pwTooShort": "Password must be at least 6 characters"
   },
   "btn" : {
     "ok" : "ok",

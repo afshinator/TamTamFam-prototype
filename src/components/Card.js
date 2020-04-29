@@ -10,7 +10,7 @@ const Card = (props) => {
     <Fade className="flex max-w-md p-3 m-6 bg-orange-100">
       <div className="w-full">
         <h1 className="text-2xl leading-tight text-blue-700">{props.title || "Generic card"}</h1>
-        <div className="flex justify-between">{props.children}</div>
+        <div className="">{props.children}</div>
       </div>
     </Fade>
   )

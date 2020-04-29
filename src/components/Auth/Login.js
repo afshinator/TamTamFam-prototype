@@ -1,9 +1,20 @@
-import React from "react";
+import React from "react"
 import { useTranslation } from "react-i18next"
-import Card from './../Card';
+import Card from "./../Card"
+import useFormValidation from "./../../utils/useFormValidation"
+import validateLogin from "./../../utils/validateLogin"
 
+const INITIAL_STATE = {
+  name: "",
+  email: "",
+  password: "",
+}
+
+const ERROR = "text-red-600"
+const PLACEHOLDER = <p className="p-3"></p>
+
+// Login is both the Login and the Create Account form - for now
 function Login(props) {
-  const [login, setLogin] = React.useState(true);
   const { t, i18n } = useTranslation(["app"])
   const loginTxt = t("app:auth:login", "Login")
   const createAcctTxt = t("app:auth:createAccount", "Create Account")
@@ -14,33 +25,70 @@ function Login(props) {
   const haveAcctTxt = t("app:auth:haveAccount", "Have Account?")
   const submitTxt = t("app:btn:submit", "Submit")
 
+  const [login, setLogin] = React.useState(true)
+  const {
+    handleSubmit,
+    handleBlur,
+    handleChange,
+    values,
+    errors,
+    isSubmitting,
+  } = useFormValidation(INITIAL_STATE, validateLogin, t)
+
   return (
-    <Card title="Login/Create Account" >
-      <h2 className="">{login ? loginTxt : createAcctTxt }</h2>
-      <form className="">
+    <Card title={login ? loginTxt : createAcctTxt}>
+      <form onSubmit={handleSubmit} className="flex flex-col mt-5 transition">
         {!login && (
-          <input type="text" placeholder={nameTxt} autoComplete="off" />
+          <input
+            type="text"
+            onChange={handleChange}
+            value={values.name}
+            name="name"
+            placeholder={nameTxt}
+            autoComplete="off"
+            className="mb-2"
+          />
         )}
-        <input type="email" placeholder={emailTxt} autoComplete="off" />
-        <br />
-        <input type="password" placeholder={choosePwTxt} />
-        <div className="flex ">
-          <button type="submit" className="button pointer mr2">
-            {submitTxt}
-          </button>
-          <br />
-          <button
-            type="button"
-            className="pointer button"
-            onClick={() => setLogin(prevLogin => !prevLogin)}
-          >
-             {login ? needAcctTxt : haveAcctTxt }
-          </button>
-        </div>
+        <input
+          type="email"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.email}
+          name="email"
+          placeholder={emailTxt}
+          autoComplete="off"
+        />
+        {errors.email ? <p className={ERROR}>{errors.email}</p> : PLACEHOLDER}
+ 
+        <input
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.password}
+          className={`mt-2 ${errors.password && ERROR}`}
+          type="password"
+          name="password"
+          placeholder={choosePwTxt}
+        />
+        {errors.password ? <p className={ERROR}>{errors.password}</p> :PLACEHOLDER}
+        <button
+          type="submit"
+          className="p-2 mt-5 mr-2 pointer"
+          disabled={isSubmitting}
+          style={{ background: isSubmitting ? "grey" : "orange" }}
+        >
+          {submitTxt}
+        </button>
+
+        <button
+          type="button"
+          className="mb-3 pointer"
+          onClick={() => setLogin((prevLogin) => !prevLogin)}
+        >
+          {login ? needAcctTxt : haveAcctTxt}
+        </button>
       </form>
     </Card>
   )
-
 }
 
-export default Login;
+export default Login
