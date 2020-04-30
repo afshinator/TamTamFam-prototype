@@ -8,10 +8,12 @@ import Card from "./Card"
 import Navi from "./Navi"
 import AppTitle from "./AppTitle"
 import { Button } from "../styles"
-import LanguageSwitcher from './LaungageSwitcher';
+import LanguageSwitcher from "./LaungageSwitcher"
 export const StyledAppArea = styled.main`
   height: 100vh;
 `
+const STARTUP_DELAY = 1700
+
 /* AppArea contains
     the routes, 
     the navigation links at top to switch routes,
@@ -21,15 +23,16 @@ export const StyledAppArea = styled.main`
 function AppArea(props) {
   const { t, i18n } = useTranslation(["translation", "alert"])
   const { lastKnownLocation, liveGeoData, userPrefs } = props
+  const [readyToGo, setReadyToGo] = useState(false)
   const [txt, setTxt] = useState("")
 
   // console.log(browserLocation)
   // console.log("AppArea props ", props)
   // console.info("language: ", i18n.language)
 
-  const changeLanguage = (code) => {
-    i18n.changeLanguage(code)
-  }
+  useEffect(()=>{
+    setTimeout(()=>{setReadyToGo(true)}, STARTUP_DELAY)
+  }, [])
 
   useEffect(() => {
     // Check to see if we have no idea what their location is:
@@ -56,22 +59,26 @@ function AppArea(props) {
     }
   }, [t, liveGeoData, liveGeoData.latitude, lastKnownLocation, userPrefs])
 
-  const cardTitle = t("alert:status")
+  const cardTitle = t("alert:status") // Location Status card
 
   return (
     <BrowserRouter>
       <StyledAppArea>
-        <AppTitle />
-        <Navi />
-        <Card title={cardTitle}>{txt}</Card>
-        <LanguageSwitcher />
-        <h1>{t("alert:hello", "wtf")}</h1>
-        <div>
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/forgot" component={ForgotPassword} />
-          </Switch>
-        </div>
+        {readyToGo ? (
+          <>
+            <Navi />
+            <Card title={cardTitle}>{txt}</Card>
+            <LanguageSwitcher />
+            <AppTitle />
+            <h1>{t("alert:hello", "wtf")}</h1>
+            <div>
+              <Switch>
+                <Route path="/login" component={Login} />
+                {/* <Route path="/forgot" component={ForgotPassword} /> */}
+              </Switch>
+            </div>
+          </>
+        ) : null}
       </StyledAppArea>
     </BrowserRouter>
   )
