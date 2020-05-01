@@ -3,12 +3,12 @@ import { useTranslation } from "react-i18next"
 import Card from "./../Card"
 import useFormValidation from "./../../utils/useFormValidation"
 import validateLogin from "./../../utils/validateLogin"
-import firebase from './../../firebase';
+import firebase from "./../../firebase"
 
 const ERROR = "text-red-600"
 const PLACEHOLDER = <p className="p-3"></p>
 
-const INITIAL_STATE = {
+const EMPTY_FORM = {
   name: "",
   email: "",
   password: "",
@@ -27,6 +27,8 @@ function Login(props) {
   const submitTxt = t("app:btn:submit", "Submit")
 
   const [login, setLogin] = React.useState(true)
+  const [firebaseError, setFirebaseError] = React.useState(null)
+
   const {
     handleSubmit,
     handleBlur,
@@ -34,14 +36,20 @@ function Login(props) {
     values,
     errors,
     isSubmitting,
-  } = useFormValidation(INITIAL_STATE, validateLogin, authenticateUser, t)
+  } = useFormValidation(EMPTY_FORM, validateLogin, authenticateUser, t)
 
   async function authenticateUser() {
-    const { name, email, password } = values;
-    const response = login
-      ? await firebase.login(email, password)
-      : await firebase.register(name, email, password);
-    console.log({ response });
+    const { name, email, password } = values
+
+    try {
+      const response = login
+        ? await firebase.login(email, password)
+        : await firebase.register(name, email, password)
+      console.log({ response })
+    } catch (err) {
+      console.error("Authentication Error", err)
+      setFirebaseError(err.message)
+    }
   }
 
   return (
@@ -79,6 +87,7 @@ function Login(props) {
           placeholder={choosePwTxt}
         />
         {errors.password ? <p className={ERROR}>{errors.password}</p> : PLACEHOLDER}
+        {firebaseError && <p className="error-text">{firebaseError}</p>}
         <button
           type="submit"
           className="p-2 mt-5 mr-2 pointer"

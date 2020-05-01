@@ -14,7 +14,7 @@ class Firebase {
       email,
       password
     );
-    return newUser.user.updateProfile({
+    return await newUser.user.updateProfile({
       displayName: name
     });
   }
