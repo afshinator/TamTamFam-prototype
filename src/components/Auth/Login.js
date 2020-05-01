@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next"
 import Card from "./../Card"
 import useFormValidation from "./../../utils/useFormValidation"
 import validateLogin from "./../../utils/validateLogin"
+import firebase from './../../firebase';
 
 const ERROR = "text-red-600"
 const PLACEHOLDER = <p className="p-3"></p>
@@ -33,7 +34,15 @@ function Login(props) {
     values,
     errors,
     isSubmitting,
-  } = useFormValidation(INITIAL_STATE, validateLogin, t)
+  } = useFormValidation(INITIAL_STATE, validateLogin, authenticateUser, t)
+
+  async function authenticateUser() {
+    const { name, email, password } = values;
+    const response = login
+      ? await firebase.login(email, password)
+      : await firebase.register(name, email, password);
+    console.log({ response });
+  }
 
   return (
     <Card title={login ? loginTxt : createAcctTxt}>
