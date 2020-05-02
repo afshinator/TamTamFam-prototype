@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from 'react-router-dom'
 import { useTranslation } from "react-i18next"
 import Card from "./../Card"
 import useFormValidation from "./../../utils/useFormValidation"
@@ -105,6 +106,9 @@ function Login(props) {
           {login ? needAcctTxt : haveAcctTxt}
         </button>
       </form>
+      <div className="">
+        <Link to="/forgot">Forgot password?</Link>
+      </div>
     </Card>
   )
 }

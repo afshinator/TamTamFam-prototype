@@ -83,7 +83,7 @@ function AppArea(props) {
               <div>
                 <Switch>
                   <Route path="/login" component={Login} />
-                  {/* <Route path="/forgot" component={ForgotPassword} /> */}
+                  <Route path="/forgot" component={ForgotPassword} />
                 </Switch>
               </div>
             </>
