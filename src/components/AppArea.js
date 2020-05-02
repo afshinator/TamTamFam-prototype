@@ -9,6 +9,10 @@ import Navi from "./Navi"
 import AppTitle from "./AppTitle"
 import { Button } from "../styles"
 import LanguageSwitcher from "./LaungageSwitcher"
+
+import useAuth from "./Auth/useAuth"
+import firebase, { FirebaseContext } from "../firebase"
+
 export const StyledAppArea = styled.main`
   height: 100vh;
 `
@@ -30,8 +34,10 @@ function AppArea(props) {
   // console.log("AppArea props ", props)
   // console.info("language: ", i18n.language)
 
-  useEffect(()=>{
-    setTimeout(()=>{setReadyToGo(true)}, STARTUP_DELAY)
+  useEffect(() => {
+    setTimeout(() => {
+      setReadyToGo(true)
+    }, STARTUP_DELAY)
   }, [])
 
   useEffect(() => {
@@ -61,25 +67,29 @@ function AppArea(props) {
 
   const cardTitle = t("alert:status") // Location Status card
 
+  const user = useAuth()
+
   return (
     <BrowserRouter>
-      <StyledAppArea>
-        {readyToGo ? (
-          <>
-            <Navi />
-            <Card title={cardTitle}>{txt}</Card>
-            <LanguageSwitcher />
-            <AppTitle />
-            <h1>{t("alert:hello", "wtf")}</h1>
-            <div>
-              <Switch>
-                <Route path="/login" component={Login} />
-                {/* <Route path="/forgot" component={ForgotPassword} /> */}
-              </Switch>
-            </div>
-          </>
-        ) : null}
-      </StyledAppArea>
+      <FirebaseContext.Provider value={{ user, firebase }}>
+        <StyledAppArea>
+          {readyToGo ? (
+            <>
+              <Navi />
+              <Card title={cardTitle}>{txt}</Card>
+              <LanguageSwitcher />
+              <AppTitle />
+              <h1>{t("alert:hello", "wtf")}</h1>
+              <div>
+                <Switch>
+                  <Route path="/login" component={Login} />
+                  {/* <Route path="/forgot" component={ForgotPassword} /> */}
+                </Switch>
+              </div>
+            </>
+          ) : null}
+        </StyledAppArea>
+      </FirebaseContext.Provider>
     </BrowserRouter>
   )
 }
