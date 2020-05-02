@@ -12,12 +12,21 @@ function Navi() {
           Home
         </NavLink>
         <div className="divider">|</div>
+        {user && (
+          <>
+            <div className="divider">|</div>
+            <NavLink to="/create" className="header-link">
+              submit
+            </NavLink>
+          </>
+        )}
+        <div className="divider">|</div>
         <div className="flex">
           {user ? (
             <>
               <div className="mx-3">{user.displayName}</div>
               <div className="divider">|</div>
-              <div className="mx-3">logout</div>
+              <div className="mx-3" onClick={() => firebase.logout()}>logout</div>
             </>
           ) : (
             <NavLink to="/login" className="mx-3">
