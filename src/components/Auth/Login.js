@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import Card from "./../Card"
 import useFormValidation from "./../../utils/useFormValidation"
@@ -26,6 +26,7 @@ function Login(props) {
   const needAcctTxt = t("app:auth:needAccount", "Need Account?")
   const haveAcctTxt = t("app:auth:haveAccount", "Have Account?")
   const submitTxt = t("app:btn:submit", "Submit")
+  const forgetPw = t("app:auth:forgetPw", "Forget pw?")
 
   const [login, setLogin] = React.useState(true)
   const [firebaseError, setFirebaseError] = React.useState(null)
@@ -53,19 +54,30 @@ function Login(props) {
     }
   }
 
+  const readyToSubmit = !isSubmitting &&
+    ( (login && Object.keys(errors).length === 1 && errors['name'])
+    || (!login && Object.keys(errors).length === 0) )
+
+// console.log('ready to submit ', Object.keys(errors).length, errors, readyToSubmit)
+
+
   return (
     <Card title={login ? loginTxt : createAcctTxt}>
       <form onSubmit={handleSubmit} className="flex flex-col mt-5 transition">
         {!login && (
-          <input
-            type="text"
-            onChange={handleChange}
-            value={values.name}
-            name="name"
-            placeholder={nameTxt}
-            autoComplete="off"
-            className="mb-2"
-          />
+          <>
+            <input
+              type="text"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.name}
+              name="name"
+              placeholder={nameTxt}
+              autoComplete="off"
+              className="mb-2"
+            />
+            {errors.name ? <p className={ERROR}>{errors.name}</p> : PLACEHOLDER}
+          </>
         )}
         <input
           type="email"
@@ -92,8 +104,8 @@ function Login(props) {
         <button
           type="submit"
           className="p-2 mt-5 mr-2 pointer"
-          disabled={isSubmitting}
-          style={{ background: isSubmitting ? "grey" : "orange" }}
+          disabled={!readyToSubmit}
+          style={{ background: !readyToSubmit ? "grey" : "orange" }}
         >
           {submitTxt}
         </button>
@@ -107,7 +119,7 @@ function Login(props) {
         </button>
       </form>
       <div className="">
-        <Link to="/forgot">Forgot password?</Link>
+        <Link to="/forgot">{forgetPw}</Link>
       </div>
     </Card>
   )

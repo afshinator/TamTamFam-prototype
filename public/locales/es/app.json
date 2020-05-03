@@ -11,8 +11,11 @@
     "haveAccount": "¿Ya tiene una cuenta?",
     "invalidEmail": "Correo electrónico no válida",
     "emailRequired": "Se requiere correo electrónico",
+    "nameRequired": "Se requiere el nombre",
+    "invalidName": "Nombre inválido",
     "pwRequired": "Se requiere contraseña",
-    "pwTooShort": "La contraseña debe tener al menos 6 caracteres"
+    "pwTooShort": "La contraseña debe tener al menos 6 caracteres",
+    "forgetPw": "¿Se te olvidó tu contraseña?"
   },
   "btn" : {
     "ok" : "Bien",
