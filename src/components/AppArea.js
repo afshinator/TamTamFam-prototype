@@ -13,10 +13,11 @@ import LanguageSwitcher from "./LaungageSwitcher"
 import useAuth from "./Auth/useAuth"
 import firebase, { FirebaseContext } from "../firebase"
 import image1 from "../assets/atsimevu.jpg"
+import LandingPage from '../pages/Landing';
 
 const AppAreaImg = styled.div`
   height: 100vh;
-  background:url(${image1}) no-repeat center center fixed;
+  background: url(${image1}) no-repeat center center fixed;
   background-size: cover;
 `
 
@@ -89,6 +90,8 @@ function AppArea(props) {
               <h1>{t("alert:hello", "wtf")}</h1>
               <div>
                 <Switch>
+                  <Route exact path="/" render={() => <Redirect to="/landing" />} />
+                  <Route path="/landing" component={LandingPage} />
                   <Route path="/login" component={Login} />
                   <Route path="/forgot" component={ForgotPassword} />
                 </Switch>
