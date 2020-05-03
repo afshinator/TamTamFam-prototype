@@ -18,7 +18,7 @@ const AppTitle = (props) => {
 
   const contentProps = useSpring({
     opacity: toggle ? 1 : 0,
-    marginTop: toggle ? 25 : -500,
+    marginTop: toggle ? 0 : -500,
     onRest: ()=>{ if (toggle) setShowSubTitle(true)}
   })
 
@@ -30,7 +30,7 @@ const AppTitle = (props) => {
 
   return (
     <animated.div
-      className="absolute top-0 right-0 w-auto max-w-md select-none"
+      className="absolute top-0 right-0 w-auto bg-gray-800 rounded-sm shadow-xl select-none opactiy-25"
       style={contentProps}
     >
       <img src={titleImg} alt={"TamTamFam Website"} />

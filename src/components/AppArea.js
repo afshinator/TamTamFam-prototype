@@ -12,6 +12,13 @@ import LanguageSwitcher from "./LaungageSwitcher"
 
 import useAuth from "./Auth/useAuth"
 import firebase, { FirebaseContext } from "../firebase"
+import image1 from "../assets/atsimevu.jpg"
+
+const AppAreaImg = styled.div`
+  height: 100vh;
+  background:url(${image1}) no-repeat center center fixed;
+  background-size: cover;
+`
 
 export const StyledAppArea = styled.main`
   height: 100vh;
@@ -72,7 +79,7 @@ function AppArea(props) {
   return (
     <BrowserRouter>
       <FirebaseContext.Provider value={{ user, firebase }}>
-        <StyledAppArea>
+        <AppAreaImg>
           {readyToGo ? (
             <>
               <Navi />
@@ -88,7 +95,7 @@ function AppArea(props) {
               </div>
             </>
           ) : null}
-        </StyledAppArea>
+        </AppAreaImg>
       </FirebaseContext.Provider>
     </BrowserRouter>
   )

@@ -10,8 +10,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 html {
-  transition: background 1.5s linear;
-  background-color: #444;
+  transition: background 0.5s linear;
+  background-color: #444;    
   background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAPCAQAAAC/mnxTAAAAIUlEQVR4AWPc7sywl4GBgUSScTsD6YBsbYPNkaOOHHUkALSqN8mc6mmTAAAAAElFTkSuQmCC);
 }
 
