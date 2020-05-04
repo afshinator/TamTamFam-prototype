@@ -6,7 +6,7 @@ function Navi() {
   const { user, firebase } = React.useContext(FirebaseContext)
 
   return (
-    <div className="">
+    <div className="mt-3 bg-white opacity-75">
       <div className="flex">
         <NavLink to="/" className="mx-3 ">
           Home

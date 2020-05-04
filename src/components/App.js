@@ -1,6 +1,5 @@
 import React, { useEffect } from "react"
 import { createGlobalStyle } from "styled-components"
-import DancingScript from "../assets/DancingScript-Regular.ttf"
 import Allerta from "../assets/Allerta-Regular.ttf"
 import useMobileDetect from "use-mobile-detect-hook"
 import useLocalStorage from "./../utils/useLocalStorage"
@@ -13,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     src: url(${Allerta});
   }
   body {
-    font-family: "Allerta-Regular";
+    /* font-family: "Allerta-Regular"; */
   }
 `
 
