@@ -13,7 +13,7 @@ const PAGE_BKGD_COLOR = "text-gray-100"
 
 // items-center content-center justify-center
 const PageContainer = tw.div`relative 
-flex pt-16 pb-32`
+flex flex-col pt-16 pb-32`
 const LandingPageContainer = styled(PageContainer)`
   min-height: 75vh;
 `
@@ -35,14 +35,14 @@ const BackgroundWallpaper = ({ imageUrl, overlayOpacity }) => {
 
 const HeroMessage = () => {
   return (
-    <div class="container relative mx-auto">
-      <div class="flex flex-wrap items-center">
-        <div class="w-full px-4 ml-auto mr-auto text-center lg:w-6/12">
-          <div class="pr-12">
-            <h2 class="text-5xl font-semibold text-white">
+    <div className="container relative mx-auto">
+      <div className="flex flex-wrap items-center">
+        <div className="w-full px-4 ml-auto mr-auto text-center lg:w-6/12">
+          <div className="pr-12">
+            <h2 className="text-5xl font-semibold text-white">
               Connect with other folks in the drum and dance community
             </h2>
-            <p class="mt-4 text-lg text-gray-300">
+            <p className="mt-4 text-lg text-gray-300">
               Are you a fan of traditional drumming and/or dancing? This site is for you. Here
               you'll be able to schedule drum jams, dance workshops and classes, etc...
             </p>
@@ -77,6 +77,26 @@ const WallpaperSlant = () => {
   )
 }
 
+const TopCard = (props) => {
+  return (
+    <div className={`w-full px-4 text-center md:w-4/12 ${props.classes}`}>
+      <div className="relative flex flex-col w-full min-w-0 mb-8 break-words bg-white rounded-lg shadow-lg">
+        <div className="flex-auto px-4 py-5">
+          <div
+            className={`inline-flex items-center justify-center w-12 h-12 p-3 mb-5 text-center text-white 
+          rounded-full shadow-lg ${props.circleColor}`}
+          >
+            <i className="fas fa-retweet"></i>
+            {/* <i className="fas fa-award"></i> <i className="fas fa-fingerprint"></i> */}
+          </div>
+          <h6 className="text-xl font-semibold">{props.title}</h6>
+          <p className="mt-2 mb-4 text-gray-600">{props.children}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function LandingPage() {
   return (
     <LandingPageContainer>
@@ -84,6 +104,59 @@ export default function LandingPage() {
       <Navi></Navi>
       <HeroMessage />
       <WallpaperSlant />
+
+      <section className="pb-20 -mt-24 bg-gray-300">
+        <div className="container px-4 mx-auto">
+          <div className="flex flex-wrap">
+            <TopCard title="First Card" classes="pt-6 lg:pt-12" circleColor="bg-red-400">
+              Divide details about your product or agency work into parts. A paragraph describing a
+              feature will be enough.
+            </TopCard>
+            <TopCard title="Second card" circleColor="bg-blue-400">
+              Keep you user engaged by providing meaningful information. Remember that by this time,
+              the user is curious.
+            </TopCard>
+            <TopCard title="Third Card" classes="pt-6 lg:pt-12" circleColor="bg-green-400">
+              Write a few lines about each one. A paragraph describing a feature will be enough.
+              Keep you user engaged!.
+            </TopCard>
+          </div>
+        </div>
+      </section>
+
+      
+      <div>
+        <h1>
+asfafsafas
+        </h1>
+        <p>asfadfasdfa</p>
+        <p>asdfasdfasf</p>
+        <p>adsfadfasdfasdf</p>
+      </div>
+      <div>
+        <h1>
+asfafsafas
+        </h1>
+        <p>asfadfasdfa</p>
+        <p>asdfasdfasf</p>
+        <p>adsfadfasdfasdf</p>
+      </div>
+      <div>
+        <h1>
+asfafsafas
+        </h1>
+        <p>asfadfasdfa</p>
+        <p>asdfasdfasf</p>
+        <p>adsfadfasdfasdf</p>
+      </div>
+      <div>
+        <h1>
+asfafsafas
+        </h1>
+        <p>asfadfasdfa</p>
+        <p>asdfasdfasf</p>
+        <p>adsfadfasdfasdf</p>
+      </div>
     </LandingPageContainer>
   )
 }
