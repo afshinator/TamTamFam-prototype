@@ -2,11 +2,11 @@ import React from "react"
 import { withRouter, NavLink } from "react-router-dom"
 import { FirebaseContext } from "../firebase"
 
-function Navi() {
+function Navi(props) {
   const { user, firebase } = React.useContext(FirebaseContext)
 
   return (
-    <div className="mt-3 bg-white opacity-75">
+    <div className="absolute top-0 bg-white opacity-75">
       <div className="flex">
         <NavLink to="/" className="mx-3 ">
           Home

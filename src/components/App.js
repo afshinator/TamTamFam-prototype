@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react"
 import { createGlobalStyle } from "styled-components"
 import Allerta from "../assets/Allerta-Regular.ttf"
