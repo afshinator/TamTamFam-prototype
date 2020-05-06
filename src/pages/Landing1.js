@@ -152,7 +152,7 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-
+{/* 
         <section className="relative py-20">
           <div
             className="absolute top-0 left-0 right-0 bottom-auto w-full -mt-20 overflow-hidden pointer-events-none"
@@ -459,7 +459,9 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-        <section className="relative block py-24 bg-gray-900 lg:pt-0">
+        */}
+{/*         
+        <section className="relative block py-24 bg-gray-900 lg:pt-0"> 
           <div className="container px-4 mx-auto">
             <div className="flex flex-wrap justify-center -mt-48 lg:-mt-64">
               <div className="w-full px-4 lg:w-6/12">
@@ -528,6 +530,7 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+       */}
       </main>
       <Footer />
     </>
