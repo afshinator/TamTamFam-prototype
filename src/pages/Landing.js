@@ -1,9 +1,13 @@
 import React from "react"
-import { useSpring, animated } from 'react-spring'
+import { useSpring, animated } from "react-spring"
 import Navbar from "./Navbar.js"
 import Footer from "./Footer.js"
+import styled from "styled-components"
 // import image from "../assets/img-orig.jpg"
 import image from "../assets/atsimevu.jpg"
+import SvgUpwardDancer from "../assets/upward-dancer.svg"
+import SvgConga1 from "../assets/conga1.svg"
+import SvgDjembe1 from "../assets/djembe1.svg"
 
 const calc = (x, y) => [-(y - window.innerHeight / 2) / 20, (x - window.innerWidth / 2) / 20, 1.1]
 const trans = (x, y, s) => `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
@@ -35,13 +39,17 @@ const BackgroundWallpaper = ({ imageUrl, overlayOpacity, children }) => {
 }
 
 const HeroMessage = () => {
-  const [props, set] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }))
+  const [props, set] = useSpring(() => ({
+    xys: [0, 0, 1],
+    config: { mass: 5, tension: 350, friction: 40 },
+  }))
 
   return (
-    <animated.div className="container relative mx-auto"
-    onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
-    onMouseLeave={() => set({ xys: [0, 0, 1] })}
-    style={{ transform: props.xys.interpolate(trans) }}
+    <animated.div // https://codesandbox.io/embed/rj998k4vmm
+      className="container relative mx-auto"
+      onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
+      onMouseLeave={() => set({ xys: [0, 0, 1] })}
+      style={{ transform: props.xys.interpolate(trans) }}
     >
       <div className="flex flex-wrap items-center">
         <div className="w-full px-4 ml-auto mr-auto text-center lg:w-6/12">
@@ -79,20 +87,43 @@ const WallpaperSlant = () => {
   )
 }
 
-const TopCard = (props) => {
+// const AnimatedImage = styled.div`
+// @keyframes alertPulse {
+//   0% {background-color: #9A2727; opacity: 1;}
+//   50% {opacity: red; opacity: 0.75; }
+//   100% {opacity: #9A2727; opacity: 1;}
+// }
+
+// animation: alertPulse 2s ease-out;
+// animation-iteration-count: infinite;
+// opacity: 1;
+// background: transparent;
+// `
+
+const TopCard = ({ img, circleColor, ctrClasses, classes, alt, title, children }) => {
+
   return (
-    <div className={`w-full px-4 text-center md:w-4/12 ${props.classes}`}>
-      <div className="relative flex flex-col w-full min-w-0 mb-8 break-words bg-white rounded-lg shadow-lg">
+    <div className={`w-full px-4 text-center md:w-4/12 ${ctrClasses}`}>
+      <div
+        className={`relative flex flex-col w-full min-w-0 mb-8 break-words 
+        bg-white rounded-lg shadow-lg ${classes}`}
+      >
         <div className="flex-auto px-4 py-5">
           <div
-            className={`inline-flex items-center justify-center w-12 h-12 p-3 mb-5 text-center text-white 
-          rounded-full shadow-lg ${props.circleColor}`}
+            className={`inline-flex items-center justify-center w-24 h-16 p-3 mb-5 text-center text-white 
+          rounded-full shadow-lg ${circleColor}`}
           >
             <i className="fas fa-retweet"></i>
+            <img
+              src={img}
+              className="mt-2"
+              style={{transform: 'rotate(7deg)'}}
+              alt={alt}
+            />
             {/* <i className="fas fa-award"></i> <i className="fas fa-fingerprint"></i> */}
           </div>
-          <h6 className="text-xl font-semibold">{props.title}</h6>
-          <p className="mt-2 mb-4 text-gray-600">{props.children}</p>
+          <h6 className="text-xl font-semibold">{title}</h6>
+          <p className="mt-2 mb-4 text-gray-600">{children}</p>
         </div>
       </div>
     </div>
@@ -112,15 +143,32 @@ export default function Landing() {
         <section className="pb-20 -mt-24 bg-ttfgray">
           <div className="container px-4 mx-auto">
             <div className="flex flex-wrap">
-              <TopCard title="First Card" classes="pt-6 lg:pt-12" circleColor="bg-red-400">
+              <TopCard
+                title="First Card"
+                classes="bg-ttfgray-0"
+                ctrClasses="pt-6 lg:pt-12"
+                circleColor="bg-ttfyellow-3"
+                img={SvgConga1}
+              >
                 Divide details about your product or agency work into parts. A paragraph describing
                 a feature will be enough.
               </TopCard>
-              <TopCard title="Second card" circleColor="bg-blue-400">
+              <TopCard
+                title="Second card"
+                classes="bg-ttfgray-0"
+                circleColor="bg-ttfyellow-4"
+                img={SvgUpwardDancer}
+              >
                 Keep you user engaged by providing meaningful information. Remember that by this
                 time, the user is curious.
               </TopCard>
-              <TopCard title="Third Card" classes="pt-6" circleColor="bg-green-400">
+              <TopCard
+                title="Third Card"
+                classes="bg-ttfgray-0"
+                ctrClasses="pt-6"
+                circleColor="bg-ttfyellow-5"
+                img={SvgDjembe1}
+              >
                 Write a few lines about each one. A paragraph describing a feature will be enough.
                 Keep you user engaged!.
               </TopCard>

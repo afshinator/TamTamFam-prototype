@@ -2,6 +2,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'ttfgray-0': '#f9f7f5',
         'ttfgray-1': '#edeae5',
         'ttfgray-2': '#dbd4cf',
         'ttfgray-3': '#c7bcb8',
