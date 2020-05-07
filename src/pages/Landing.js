@@ -32,7 +32,7 @@ const BackgroundWallpaper = ({ imageUrl, overlayOpacity, children }) => {
         <span
           id="blackOverlay"
           className="absolute w-full h-full bg-black"
-          style={{ opacity: overlayOpacity || 0.8 }}
+          style={{ opacity: overlayOpacity || 0.6 }}
         ></span>
       </div>
       {children}
@@ -69,19 +69,19 @@ const HeroMessage = () => {
   )
 }
 
-const SvgPolygon = ({color}) => {
+const SvgPolygon = ({ color }) => {
   return (
     <svg
-    className="absolute bottom-0 overflow-hidden"
-    xmlns="http://www.w3.org/2000/svg"
-    preserveAspectRatio="none"
-    version="1.1"
-    viewBox="0 0 2560 100"
-    x="0"
-    y="0"
-  >
-    <polygon className={`fill-current ${color}`} points="2560 0 2560 100 0 100"></polygon>
-  </svg>
+      className="absolute bottom-0 overflow-hidden"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+      version="1.1"
+      viewBox="0 0 2560 100"
+      x="0"
+      y="0"
+    >
+      <polygon className={`fill-current ${color}`} points="2560 0 2560 100 0 100"></polygon>
+    </svg>
   )
 }
 
@@ -96,7 +96,7 @@ const WallpaperSlant = () => {
   )
 }
 
-const WallpaperSlant2 = ({color}) => {
+const WallpaperSlant2 = ({ color }) => {
   return (
     <div
       className="absolute top-0 left-0 right-0 bottom-auto w-full -mt-20 overflow-hidden pointer-events-none"
@@ -106,8 +106,6 @@ const WallpaperSlant2 = ({color}) => {
     </div>
   )
 }
-
-
 
 // const AnimatedImage = styled.div`
 // @keyframes alertPulse {
@@ -149,7 +147,7 @@ const TopCard = ({ img, circleColor, ctrClasses, classes, alt, title, children }
 export default function Landing() {
   return (
     <>
-      <Navbar transparent />
+      <Navbar />
       <main>
         <BackgroundWallpaper imageUrl={image}>
           <HeroMessage />
@@ -315,8 +313,8 @@ export default function Landing() {
               <div className="w-full px-4 lg:w-6/12">
                 <h2 className="text-4xl font-semibold">Here are somet things planned</h2>
                 <p className="m-4 text-lg leading-relaxed text-gray-600">
-                  In the works is a whole host of functionality including social 
-                  stuff you're already used to, and scheduling, and chat, and more!
+                  In the works is a whole host of functionality including social stuff you're
+                  already used to, and scheduling, and chat, and more!
                 </p>
               </div>
             </div>

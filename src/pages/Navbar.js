@@ -1,14 +1,14 @@
-import React from "react";
+import React from "react"
 
 export default function Navbar(props) {
-  const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const [navbarOpen, setNavbarOpen] = React.useState(false)
   return (
     <>
       <nav
         className={
           (props.transparent
             ? "top-0 absolute z-50 w-full"
-            : "relative shadow-lg bg-white shadow-lg") +
+            : "relative shadow-lg opacity-50 shadow-lg") +
           " flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg"
         }
       >
@@ -29,10 +29,7 @@ export default function Navbar(props) {
               onClick={() => setNavbarOpen(!navbarOpen)}
             >
               <i
-                className={
-                  (props.transparent ? "text-white" : "text-gray-800") +
-                  " fas fa-bars"
-                }
+                className={(props.transparent ? "text-white" : "text-gray-800") + " fas fa-bars"}
               ></i>
             </button>
           </div>
@@ -56,9 +53,7 @@ export default function Navbar(props) {
                 >
                   <i
                     className={
-                      (props.transparent
-                        ? "lg:text-gray-300 text-gray-500"
-                        : "text-gray-500") +
+                      (props.transparent ? "lg:text-gray-300 text-gray-500" : "text-gray-500") +
                       " far fa-file-alt text-lg leading-lg mr-2"
                     }
                   />{" "}
@@ -79,9 +74,7 @@ export default function Navbar(props) {
                 >
                   <i
                     className={
-                      (props.transparent
-                        ? "lg:text-gray-300 text-gray-500"
-                        : "text-gray-500") +
+                      (props.transparent ? "lg:text-gray-300 text-gray-500" : "text-gray-500") +
                       " fab fa-facebook text-lg leading-lg "
                     }
                   />
@@ -101,9 +94,7 @@ export default function Navbar(props) {
                 >
                   <i
                     className={
-                      (props.transparent
-                        ? "lg:text-gray-300 text-gray-500"
-                        : "text-gray-500") +
+                      (props.transparent ? "lg:text-gray-300 text-gray-500" : "text-gray-500") +
                       " fab fa-twitter text-lg leading-lg "
                     }
                   />
@@ -123,9 +114,7 @@ export default function Navbar(props) {
                 >
                   <i
                     className={
-                      (props.transparent
-                        ? "lg:text-gray-300 text-gray-500"
-                        : "text-gray-500") +
+                      (props.transparent ? "lg:text-gray-300 text-gray-500" : "text-gray-500") +
                       " fab fa-github text-lg leading-lg "
                     }
                   />
@@ -152,5 +141,5 @@ export default function Navbar(props) {
         </div>
       </nav>
     </>
-  );
+  )
 }
