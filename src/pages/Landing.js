@@ -5,9 +5,11 @@ import Footer from "./Footer.js"
 import styled from "styled-components"
 // import image from "../assets/img-orig.jpg"
 import image from "../assets/atsimevu.jpg"
+import titleImg from "../assets/title-TamTamFam2.png"
 import SvgUpwardDancer from "../assets/upward-dancer.svg"
 import SvgConga1 from "../assets/conga1.svg"
 import SvgDjembe1 from "../assets/djembe1.svg"
+import dancersImg from "../assets/dancexx.jpg"
 
 const calc = (x, y) => [-(y - window.innerHeight / 2) / 20, (x - window.innerWidth / 2) / 20, 1.1]
 const trans = (x, y, s) => `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
@@ -30,7 +32,7 @@ const BackgroundWallpaper = ({ imageUrl, overlayOpacity, children }) => {
         <span
           id="blackOverlay"
           className="absolute w-full h-full bg-black"
-          style={{ opacity: overlayOpacity || 0.6 }}
+          style={{ opacity: overlayOpacity || 0.8 }}
         ></span>
       </div>
       {children}
@@ -54,7 +56,8 @@ const HeroMessage = () => {
       <div className="flex flex-wrap items-center">
         <div className="w-full px-4 ml-auto mr-auto text-center lg:w-6/12">
           <div className="pr-12">
-            <h1 className="text-5xl font-semibold text-white">TamTamFam</h1>
+            <h1 className="hidden text-5xl font-semibold text-white">TamTamFam</h1>
+            <img src={titleImg} alt="TamTamFam stlylized title" />
             <p className="mt-4 text-lg text-gray-300">
               Online network for the dance and drum community. Join the fam, book a jam, use your
               online cam.
@@ -66,26 +69,45 @@ const HeroMessage = () => {
   )
 }
 
+const SvgPolygon = ({color}) => {
+  return (
+    <svg
+    className="absolute bottom-0 overflow-hidden"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+    version="1.1"
+    viewBox="0 0 2560 100"
+    x="0"
+    y="0"
+  >
+    <polygon className={`fill-current ${color}`} points="2560 0 2560 100 0 100"></polygon>
+  </svg>
+  )
+}
+
 const WallpaperSlant = () => {
   return (
     <div
       className="absolute bottom-0 left-0 right-0 top-auto w-full overflow-hidden pointer-events-none"
       style={{ height: "70px", transform: "translateZ(0)" }}
     >
-      <svg
-        className="absolute bottom-0 overflow-hidden"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-        version="1.1"
-        viewBox="0 0 2560 100"
-        x="0"
-        y="0"
-      >
-        <polygon className="fill-current text-ttfgray" points="2560 0 2560 100 0 100"></polygon>
-      </svg>
+      <SvgPolygon color="text-ttfgray" />
     </div>
   )
 }
+
+const WallpaperSlant2 = ({color}) => {
+  return (
+    <div
+      className="absolute top-0 left-0 right-0 bottom-auto w-full -mt-20 overflow-hidden pointer-events-none"
+      style={{ height: "80px", transform: "translateZ(0)" }}
+    >
+      <SvgPolygon color={color} />
+    </div>
+  )
+}
+
+
 
 // const AnimatedImage = styled.div`
 // @keyframes alertPulse {
@@ -101,7 +123,6 @@ const WallpaperSlant = () => {
 // `
 
 const TopCard = ({ img, circleColor, ctrClasses, classes, alt, title, children }) => {
-
   return (
     <div className={`w-full px-4 text-center md:w-4/12 ${ctrClasses}`}>
       <div
@@ -114,12 +135,7 @@ const TopCard = ({ img, circleColor, ctrClasses, classes, alt, title, children }
           rounded-full shadow-lg ${circleColor}`}
           >
             <i className="fas fa-retweet"></i>
-            <img
-              src={img}
-              className="mt-2"
-              style={{transform: 'rotate(7deg)'}}
-              alt={alt}
-            />
+            <img src={img} className="mt-2" style={{ transform: "rotate(7deg)" }} alt={alt} />
             {/* <i className="fas fa-award"></i> <i className="fas fa-fingerprint"></i> */}
           </div>
           <h6 className="text-xl font-semibold">{title}</h6>
@@ -135,7 +151,7 @@ export default function Landing() {
     <>
       <Navbar transparent />
       <main>
-        <BackgroundWallpaper imageUrl={image} overlayOpacity={".4"}>
+        <BackgroundWallpaper imageUrl={image}>
           <HeroMessage />
           <WallpaperSlant />
         </BackgroundWallpaper>
@@ -180,31 +196,25 @@ export default function Landing() {
                   <i className="text-xl fas fa-user-friends"></i>
                 </div>
                 <h3 className="mb-2 text-3xl font-semibold leading-normal">
-                  Working with us is a pleasure
+                  Schedule a class, join a class
                 </h3>
                 <p className="mt-4 mb-4 text-lg font-light leading-relaxed text-gray-700">
-                  Don't let your uses guess by attaching tooltips and popoves to any element. Just
-                  make sure you enable them first via JavaScript.
+                  One of the things we've got cooking up is the ability to form groups and an online
+                  scheduler. So before long you will be able to schedule your next drum or dance
+                  class - or join one.
                 </p>
                 <p className="mt-0 mb-4 text-lg font-light leading-relaxed text-gray-700">
-                  The kit comes with three pre-built pages to help you get started faster. You can
-                  change the text and images and you're good to go. Just make sure you enable them
-                  first via JavaScript.
+                  With Groups will also come the ability to message back and forth and share
+                  privately with the group members.
                 </p>
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/presentation"
-                  className="mt-8 font-bold text-gray-800"
-                >
-                  Check Tailwind Starter Kit!
-                </a>
               </div>
 
               <div className="w-full px-4 ml-auto mr-auto md:w-4/12">
-                <div className="relative flex flex-col w-full min-w-0 mb-6 break-words bg-white bg-pink-600 rounded-lg shadow-lg">
+                <div className="relative flex flex-col w-full min-w-0 mb-6 break-words bg-white rounded-lg shadow-lg bg-ttfgreen-2">
                   <img
-                    alt="..."
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80"
-                    className="w-full align-middle rounded-t-lg"
+                    alt="Dance class"
+                    src={dancersImg}
+                    className="w-full align-top rounded-t-lg"
                   />
                   <blockquote className="relative p-8 mb-4">
                     <svg
@@ -219,13 +229,13 @@ export default function Landing() {
                     >
                       <polygon
                         points="-30,95 583,95 583,65"
-                        className="text-pink-600 fill-current"
+                        className="fill-current text-ttfgreen-2"
                       ></polygon>
                     </svg>
-                    <h4 className="text-xl font-bold text-white">Top Notch Services</h4>
+                    <h4 className="text-xl font-bold text-white">What Classes are available?</h4>
                     <p className="mt-2 font-light text-white text-md">
-                      The Arctic Ocean freezes every winter and much of the sea-ice then thaws every
-                      summer, and that process will continue whatever happens.
+                      Soon you'll have one go-to place for finding all the information around dance
+                      and drumming in your area, and outside your area.
                     </p>
                   </blockquote>
                 </div>
@@ -234,24 +244,8 @@ export default function Landing() {
           </div>
         </section>
 
-        <section className="relative py-20">
-          <div
-            className="absolute top-0 left-0 right-0 bottom-auto w-full -mt-20 overflow-hidden pointer-events-none"
-            style={{ height: "80px", transform: "translateZ(0)" }}
-          >
-            <svg
-              className="absolute bottom-0 overflow-hidden"
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="none"
-              version="1.1"
-              viewBox="0 0 2560 100"
-              x="0"
-              y="0"
-            >
-              <polygon className="text-white fill-current" points="2560 0 2560 100 0 100"></polygon>
-            </svg>
-          </div>
-
+        <section className="relative py-20 bg-ttfgreen-3">
+          <WallpaperSlant2 color="text-ttfgreen-3" />
           <div className="container px-4 mx-auto">
             <div className="flex flex-wrap items-center">
               <div className="w-full px-4 ml-auto mr-auto md:w-4/12">
@@ -315,14 +309,14 @@ export default function Landing() {
           </div>
         </section>
 
-        <section className="pt-20 pb-48">
+        <section className="pt-20 pb-48 bg-ttfmustard">
           <div className="container px-4 mx-auto">
             <div className="flex flex-wrap justify-center mb-24 text-center">
               <div className="w-full px-4 lg:w-6/12">
-                <h2 className="text-4xl font-semibold">Here are our heroes</h2>
+                <h2 className="text-4xl font-semibold">Here are somet things planned</h2>
                 <p className="m-4 text-lg leading-relaxed text-gray-600">
-                  According to the National Oceanic and Atmospheric Administration, Ted, Scambos,
-                  NSIDClead scentist, puts the potentially record maximum.
+                  In the works is a whole host of functionality including social 
+                  stuff you're already used to, and scheduling, and chat, and more!
                 </p>
               </div>
             </div>
@@ -476,25 +470,7 @@ export default function Landing() {
         </section>
 
         <section className="relative block pb-20 bg-gray-900">
-          <div
-            className="absolute top-0 left-0 right-0 bottom-auto w-full -mt-20 overflow-hidden pointer-events-none"
-            style={{ height: "80px", transform: "translateZ(0)" }}
-          >
-            <svg
-              className="absolute bottom-0 overflow-hidden"
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="none"
-              version="1.1"
-              viewBox="0 0 2560 100"
-              x="0"
-              y="0"
-            >
-              <polygon
-                className="text-gray-900 fill-current"
-                points="2560 0 2560 100 0 100"
-              ></polygon>
-            </svg>
-          </div>
+          <WallpaperSlant2 color="text-gray-900" />
 
           <div className="container px-4 mx-auto lg:pt-24 lg:pb-64">
             <div className="flex flex-wrap justify-center text-center">
