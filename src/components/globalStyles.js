@@ -8,3 +8,12 @@ export const GlobalStyles = createGlobalStyle`
     transition: all 0.50s linear;
   }
   `
+
+// TODO: 
+  //   @font-face {
+//     font-family: "Allerta-Regular";
+//     src: url(${Allerta});
+//   }
+//   body {
+//     /* font-family: "Allerta-Regular"; */
+//   }

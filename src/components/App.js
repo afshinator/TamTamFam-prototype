@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react"
 import { ThemeProvider } from "styled-components"
-import { useDarkMode } from "./useDarkMode"
 import { GlobalStyles } from "./globalStyles"
 import { lightTheme, darkTheme } from "./Themes"
 import ThemeToggler from "./ThemeToggler"
@@ -11,25 +10,10 @@ import useLocalStorage from "./../utils/useLocalStorage"
 import useGeolocation from "./../utils/useGeolocation"
 import AppArea from "./AppArea"
 
-// const GlobalStyle = createGlobalStyle`
-//   @font-face {
-//     font-family: "Allerta-Regular";
-//     src: url(${Allerta});
-//   }
-//   body {
-//     /* font-family: "Allerta-Regular"; */
-//   }
-// `
-
-/* Encloses the application, 
-    gets localStorage values, updates some of them,
-    sets global css,
-    encloses AppArea and passes localStorage data to it.
-*/
 function App() {
-  const [theme, themeToggler] = useDarkMode()
+  const [theme, setTheme] = useLocalStorage('lightOrDark')
+  const toggleTheme = () => { theme === 'light' ? setTheme('dark') : setTheme('light' )}
 
-  const themeMode = theme === "light" ? lightTheme : darkTheme
   const [visitCount, setVisitCount] = useLocalStorage("visitCount")
   const [lastTimestamp, setLastTimestamp] = useLocalStorage("lastTimestamp")
   const [lastKnownLocation, setLastKnownLocation] = useLocalStorage("lastKnownLocation")
@@ -52,13 +36,14 @@ function App() {
     } else {
       setVisitCount((v) => v + 1)
     }
+    if ( !theme ) setTheme("light")
     setLastTimestamp(Date.now())
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+
   return (
-    <ThemeProvider theme={themeMode}>
+    <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
       <GlobalStyles />
-      <ThemeToggler theme={theme} toggleTheme={themeToggler} />
       <AppArea
         visitCount={visitCount}
         lastTimestamp={lastTimestamp}
@@ -68,6 +53,7 @@ function App() {
         users={users}
         userPrefs={userPrefs}
       ></AppArea>
+      <ThemeToggler theme={theme} toggleTheme={toggleTheme} />
     </ThemeProvider>
   )
 }

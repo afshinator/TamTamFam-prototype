@@ -2,6 +2,9 @@ import React from "react"
 import { func, string } from "prop-types"
 import styled from "styled-components"
 
+// mostly from https://www.smashingmagazine.com/2020/04/dark-mode-react-apps-styled-components/
+
+
 const Button = styled.button`
   border: 2px solid ${({ theme }) => theme.toggleBorder};
   border-radius: 30px;
@@ -30,8 +33,9 @@ const Moon = styled.svg`
 `
 
 const ThemeToggler = ({ theme, toggleTheme }) => {
+  if ( !theme ) return null
   return (
-    <Button onClick={toggleTheme}>
+    <Button id="CLICKME" onClick={toggleTheme}>
       {theme === "light" ? (
         <Moon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <path

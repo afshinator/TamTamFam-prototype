@@ -1,4 +1,4 @@
-// https://github.com/craig1123/react-recipes/blob/master/src/useGeolocation.js
+// https://github.com/craig1123/react-recipes/blob/master/src/useLocalStorage.js
 
 import { useState } from "react"
 
