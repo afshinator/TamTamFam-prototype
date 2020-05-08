@@ -14,7 +14,7 @@ function Navbar(props) {
   const { user, firebase } = React.useContext(FirebaseContext)
 
   return (
-    <Nav className="absolute top-0 z-50 flex items-center w-full h-16">
+    <Nav className="absolute top-0 z-50 flex justify-between items-center w-full h-16">
       <div className="w-48 ml-8">
         <img
           src={titleImg}
@@ -23,21 +23,21 @@ function Navbar(props) {
         />
       </div>
 
-      <div className="divider">|</div>
-        <div className="flex">
-          {user ? (
-            <>
-              <div className="mx-3">{user.displayName}</div>
-              <div className="divider">|</div>
-              <div className="mx-3" onClick={() => firebase.logout()}>logout</div>
-            </>
-          ) : (
-            <NavLink to="/login" className="mx-3">
-              login
-            </NavLink>
-          )}
-        </div>
-
+      <div className="flex">
+        {user ? (
+          <>
+            <div className="mx-3">{user.displayName}</div>
+            <div className="divider">|</div>
+            <div className="mx-3" onClick={() => firebase.logout()}>
+              logout
+            </div>
+          </>
+        ) : (
+          <NavLink to="/login" className="mx-3">
+            Login / Register
+          </NavLink>
+        )}
+      </div>
     </Nav>
   )
 }
