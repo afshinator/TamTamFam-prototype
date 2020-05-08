@@ -47,16 +47,19 @@ function Login(props) {
       const response = login
         ? await firebase.login(email, password)
         : await firebase.register(name, email, password)
-      console.log({ response })
+      console.log('response ', { response })
     } catch (err) {
       console.error("Authentication Error", err)
       setFirebaseError(err.message)
     }
   }
 
-  const readyToSubmit = !isSubmitting &&
-    ( (login && Object.keys(errors).length === 1 && errors['name'])
-    || (!login && Object.keys(errors).length === 0) )
+  const readyToSubmit = !isSubmitting && Object.keys(errors).length < 2
+    //  (!login && Object.keys(errors).length === 0) )
+
+  // const readyToSubmit = !isSubmitting &&
+  //   ( (login && Object.keys(errors).length === 1 && errors['name'])
+  //   || (!login && Object.keys(errors).length === 0) )
 
 // console.log('ready to submit ', Object.keys(errors).length, errors, readyToSubmit)
 

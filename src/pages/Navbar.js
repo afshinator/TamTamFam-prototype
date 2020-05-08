@@ -1,19 +1,62 @@
 import React from "react"
+import { withRouter, NavLink } from "react-router-dom"
+import { FirebaseContext } from "../firebase"
+import styled from "styled-components"
+import bkgdTileImg from "../assets/nav-bkgd-tile1.png"
+import titleImg from "../assets/site-title.png"
 
-export default function Navbar(props) {
+const Nav = styled.nav`
+  background: url(${bkgdTileImg}) repeat;
+`
+
+function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false)
+  const { user, firebase } = React.useContext(FirebaseContext)
+
+  return (
+    <Nav className="absolute top-0 z-50 flex items-center w-full h-16">
+      <div className="w-48 ml-8">
+        <img
+          src={titleImg}
+          style={{ width: "100%", height: "auto" }}
+          alt="TamTamFam title"
+        />
+      </div>
+
+      <div className="divider">|</div>
+        <div className="flex">
+          {user ? (
+            <>
+              <div className="mx-3">{user.displayName}</div>
+              <div className="divider">|</div>
+              <div className="mx-3" onClick={() => firebase.logout()}>logout</div>
+            </>
+          ) : (
+            <NavLink to="/login" className="mx-3">
+              login
+            </NavLink>
+          )}
+        </div>
+
+    </Nav>
+  )
+}
+
+export function Navbar2(props) {
+  const [navbarOpen, setNavbarOpen] = React.useState(false)
+  console.log("nav bar ", navbarOpen)
   return (
     <>
       <nav
         className={
           (props.transparent
             ? "top-0 absolute z-50 w-full"
-            : "relative shadow-lg opacity-50 shadow-lg") +
+            : "relative shadow-lg  shadow-lg") +
           " flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg"
         }
       >
-        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-          <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+        <div className="container flex flex-wrap items-center justify-between px-4 mx-auto">
+          <div className="relative flex justify-between w-full lg:w-auto lg:static lg:block lg:justify-start">
             <a
               className={
                 (props.transparent ? "text-white" : "text-gray-800") +
@@ -24,12 +67,15 @@ export default function Navbar(props) {
               Tailwind Starter Kit
             </a>
             <button
-              className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+              className="block px-3 py-1 text-xl leading-none bg-transparent border border-transparent border-solid rounded outline-none cursor-pointer lg:hidden focus:outline-none"
               type="button"
               onClick={() => setNavbarOpen(!navbarOpen)}
             >
               <i
-                className={(props.transparent ? "text-white" : "text-gray-800") + " fas fa-bars"}
+                className={
+                  (props.transparent ? "text-white" : "text-gray-800") +
+                  " fas fa-bars"
+                }
               ></i>
             </button>
           </div>
@@ -40,7 +86,7 @@ export default function Navbar(props) {
             }
             id="example-navbar-warning"
           >
-            <ul className="flex flex-col lg:flex-row list-none mr-auto">
+            <ul className="flex flex-col mr-auto list-none lg:flex-row">
               <li className="flex items-center">
                 <a
                   className={
@@ -53,7 +99,9 @@ export default function Navbar(props) {
                 >
                   <i
                     className={
-                      (props.transparent ? "lg:text-gray-300 text-gray-500" : "text-gray-500") +
+                      (props.transparent
+                        ? "lg:text-gray-300 text-gray-500"
+                        : "text-gray-500") +
                       " far fa-file-alt text-lg leading-lg mr-2"
                     }
                   />{" "}
@@ -61,7 +109,7 @@ export default function Navbar(props) {
                 </a>
               </li>
             </ul>
-            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+            <ul className="flex flex-col list-none lg:flex-row lg:ml-auto">
               <li className="flex items-center">
                 <a
                   className={
@@ -74,11 +122,13 @@ export default function Navbar(props) {
                 >
                   <i
                     className={
-                      (props.transparent ? "lg:text-gray-300 text-gray-500" : "text-gray-500") +
+                      (props.transparent
+                        ? "lg:text-gray-300 text-gray-500"
+                        : "text-gray-500") +
                       " fab fa-facebook text-lg leading-lg "
                     }
                   />
-                  <span className="lg:hidden inline-block ml-2">Share</span>
+                  <span className="inline-block ml-2 lg:hidden">Share</span>
                 </a>
               </li>
 
@@ -94,11 +144,13 @@ export default function Navbar(props) {
                 >
                   <i
                     className={
-                      (props.transparent ? "lg:text-gray-300 text-gray-500" : "text-gray-500") +
+                      (props.transparent
+                        ? "lg:text-gray-300 text-gray-500"
+                        : "text-gray-500") +
                       " fab fa-twitter text-lg leading-lg "
                     }
                   />
-                  <span className="lg:hidden inline-block ml-2">Tweet</span>
+                  <span className="inline-block ml-2 lg:hidden">Tweet</span>
                 </a>
               </li>
 
@@ -114,11 +166,13 @@ export default function Navbar(props) {
                 >
                   <i
                     className={
-                      (props.transparent ? "lg:text-gray-300 text-gray-500" : "text-gray-500") +
+                      (props.transparent
+                        ? "lg:text-gray-300 text-gray-500"
+                        : "text-gray-500") +
                       " fab fa-github text-lg leading-lg "
                     }
                   />
-                  <span className="lg:hidden inline-block ml-2">Star</span>
+                  <span className="inline-block ml-2 lg:hidden">Star</span>
                 </a>
               </li>
 
@@ -143,3 +197,5 @@ export default function Navbar(props) {
     </>
   )
 }
+
+export default withRouter(Navbar)

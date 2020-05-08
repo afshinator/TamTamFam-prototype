@@ -9,6 +9,7 @@ export default function validateLogin(values, t) {
   const invalidNameTxt = t("app:auth:invalidName", "Invalid name")
 
   // Name Errors
+  /*
   if (!values.name) { // TODO: check i18n
     errors.name = nameReqTxt
   } else if ( 
@@ -16,7 +17,7 @@ export default function validateLogin(values, t) {
   ) {
     errors.name = invalidNameTxt
   }
-
+*/
   // Email Errors
   if (!values.email) {
     errors.email = emailReqTxt
