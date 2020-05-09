@@ -1,4 +1,5 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { useSpring, animated } from "react-spring"
 import Navbar from "./Navbar.js"
 import Footer from "./Footer.js"
@@ -16,6 +17,7 @@ const calc = (x, y) => [
   (x - window.innerWidth / 2) / 20,
   1.1,
 ]
+
 const trans = (x, y, s) =>
   `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
 
@@ -45,11 +47,13 @@ const BackgroundWallpaper = ({ imageUrl, overlayOpacity, children }) => {
   )
 }
 
-const HeroMessage = () => {
+const HeroMessage = ({t}) => {
   const [props, set] = useSpring(() => ({
     xys: [0, 0, 1],
     config: { mass: 5, tension: 350, friction: 40 },
   }))
+
+  const heroMsgTxt = t("landing:heroMsg", "Online network for the dance and drum community")
 
   return (
     <animated.div // https://codesandbox.io/embed/rj998k4vmm
@@ -66,8 +70,7 @@ const HeroMessage = () => {
             </h1>
             <img src={titleImg} alt="TamTamFam stlylized title" />
             <p className="mt-4 text-lg text-gray-300">
-              Online network for the dance and drum community. Join the fam,
-              book a jam, use your online cam.
+              {heroMsgTxt}
             </p>
           </div>
         </div>
@@ -168,12 +171,14 @@ const TopCard = ({
 }
 
 export default function Landing() {
+  const { t } = useTranslation(["landing"])
+
   return (
     <>
       <Navbar />
       <main>
         <BackgroundWallpaper imageUrl={image}>
-          <HeroMessage />
+          <HeroMessage t={t} />
           <WallpaperSlant />
         </BackgroundWallpaper>
 
@@ -181,33 +186,29 @@ export default function Landing() {
           <div className="container px-4 mx-auto">
             <div className="flex flex-wrap">
               <TopCard
-                title="First Card"
+                title={t("landing:topcards:title1", "Card 1")}
                 classes="bg-ttfgray-0"
                 ctrClasses="pt-6 lg:pt-12"
                 circleColor="bg-ttforange"
                 img={SvgConga1}
-              >
-                The goal is to have one place people in the dance and drum
-                community can go to for scheduling taking and teaching classes.
+              >title={t("landing:topcards:msg1", "Message 1")}
               </TopCard>
               <TopCard
-                title="Second card"
+                title={t("landing:topcards:title2", "Card 2")}
                 classes="bg-ttfgray-0"
                 circleColor="bg-ttfmustard"
                 img={SvgUpwardDancer}
               >
-                Whether you're a drummer, dancer, both or just enthusiastic
-                about either, we welcome you to become a member of the fam.
+                {t("landing:topcards:msg2", "Message 2")}
               </TopCard>
               <TopCard
-                title="Third Card"
+                title={t("landing:topcards:title3", "Card 3")}
                 classes="bg-ttfgray-0"
                 ctrClasses="pt-6"
                 circleColor="bg-ttfgreen-2"
                 img={SvgDjembe1}
               >
-                We want to help you communicate, co-ordinate, and make friends
-                with people who love this stuff like you do.
+                {t("landing:topcards:msg3", "Message 3")}
               </TopCard>
             </div>
 
