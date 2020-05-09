@@ -11,6 +11,7 @@ import SvgUpwardDancer from "../assets/upward-dancer.svg"
 import SvgConga1 from "../assets/conga1.svg"
 import SvgDjembe1 from "../assets/djembe1.svg"
 import dancersImg from "../assets/dancexx.jpg"
+import calendarImg from "../assets/calendar.png"
 
 const calc = (x, y) => [
   -(y - window.innerHeight / 2) / 20,
@@ -47,13 +48,16 @@ const BackgroundWallpaper = ({ imageUrl, overlayOpacity, children }) => {
   )
 }
 
-const HeroMessage = ({t}) => {
+const HeroMessage = ({ t }) => {
   const [props, set] = useSpring(() => ({
     xys: [0, 0, 1],
     config: { mass: 5, tension: 350, friction: 40 },
   }))
 
-  const heroMsgTxt = t("landing:heroMsg", "Online network for the dance and drum community")
+  const heroMsgTxt = t(
+    "landing:heroMsg",
+    "Online network for the dance and drum community"
+  )
 
   return (
     <animated.div // https://codesandbox.io/embed/rj998k4vmm
@@ -69,9 +73,7 @@ const HeroMessage = ({t}) => {
               TamTamFam
             </h1>
             <img src={titleImg} alt="TamTamFam stlylized title" />
-            <p className="mt-4 text-lg text-gray-300">
-              {heroMsgTxt}
-            </p>
+            <p className="mt-4 text-lg text-gray-300">{heroMsgTxt}</p>
           </div>
         </div>
       </div>
@@ -191,7 +193,8 @@ export default function Landing() {
                 ctrClasses="pt-6 lg:pt-12"
                 circleColor="bg-ttforange"
                 img={SvgConga1}
-              >title={t("landing:topcards:msg1", "Message 1")}
+              >
+                title={t("landing:topcards:msg1", "Message 1")}
               </TopCard>
               <TopCard
                 title={t("landing:topcards:title2", "Card 2")}
@@ -214,20 +217,31 @@ export default function Landing() {
 
             <div className="flex flex-wrap items-center mt-32">
               <div className="w-full px-4 ml-auto mr-auto md:w-5/12">
-                <div className="inline-flex items-center justify-center w-16 h-16 p-3 mb-6 text-center text-gray-600 bg-gray-100 rounded-full shadow-lg">
+                {/* <div className="inline-flex items-center justify-center w-16 h-16 p-3 mb-6 text-center text-gray-600 bg-gray-100 rounded-full shadow-lg">
                   <i className="text-xl fas fa-user-friends"></i>
-                </div>
+                </div> */}
+
                 <h3 className="mb-2 text-3xl font-semibold leading-normal">
                   Join a class, create a class
                 </h3>
                 <p className="mt-4 mb-4 text-lg font-light leading-relaxed text-gray-700">
-                  One of the things we've got cooking up is the ability to form
-                  groups and an online scheduler. So before long you will be
-                  able to schedule your next drum or dance class - or join one.
+                  <img
+                    src={calendarImg}
+                    className="float-right"
+                    alt="calendar"
+                  />
+                  We've got a lot of in the works. Coming soon is the ability to
+                  form groups and create and join classes. Soon you'll have
+                  access to an online calendar and scheduler that will let you
+                  see when and where your classes are, and when and where other
+                  classes in your area are. You will also be able to see all the
+                  other groups and classes around the world!
                 </p>
+
                 <p className="mt-0 mb-4 text-lg font-light leading-relaxed text-gray-700">
                   With Groups will also come the ability to message back and
-                  forth and share privately with the group members.
+                  forth and share privately or otherwise with the group members
+                  or other groups.
                 </p>
               </div>
 
