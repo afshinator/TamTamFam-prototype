@@ -12,13 +12,13 @@ export const GlobalStyles = createGlobalStyle`
     font-family: "Oxygen-Regular";
     transition: all 0.50s linear;
   }
-  `
+  .appCard {
+    background: ${({ theme }) => theme.cardBkgd};
+    color: ${({ theme }) => theme.cardTxt};
+  }
 
-// TODO:
-//   @font-face {
-//     font-family: "Allerta-Regular";
-//     src: url(${Allerta});
-//   }
-//   body {
-//     /* font-family: "Allerta-Regular"; */
-//   }
+  .appCard h3 {
+    color: ${({ theme }) => theme.cardH3};
+  }
+
+  `

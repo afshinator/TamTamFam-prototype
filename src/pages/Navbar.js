@@ -10,11 +10,11 @@ const Nav = styled.nav`
 `
 
 function Navbar(props) {
-  const [navbarOpen, setNavbarOpen] = React.useState(false)
+  // const [navbarOpen, setNavbarOpen] = React.useState(false)
   const { user, firebase } = React.useContext(FirebaseContext)
 
   return (
-    <Nav className="absolute top-0 z-50 flex justify-between items-center w-full h-16">
+    <Nav className="absolute top-0 z-50 flex items-center justify-between w-full h-16">
       <div className="w-48 ml-8">
         <img
           src={titleImg}

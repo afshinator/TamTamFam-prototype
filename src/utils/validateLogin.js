@@ -5,8 +5,8 @@ export default function validateLogin(values, t) {
   const invalidEmailTxt = t("app:auth:invalidEmail", "Invalid Email")
   const pwRequiredTxt = t("app:auth:pwRequired", "pwRequired")
   const pwTooShortTxt = t("app:auth:pwTooShort", "Password too short")
-  const nameReqTxt = t("app:auth:nameRequired", "Name required")
-  const invalidNameTxt = t("app:auth:invalidName", "Invalid name")
+  // const nameReqTxt = t("app:auth:nameRequired", "Name required")
+  // const invalidNameTxt = t("app:auth:invalidName", "Invalid name")
 
   // Name Errors
   /*

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { useSpring, animated } from "react-spring"
 import Navbar from "./Navbar.js"
 import Footer from "./Footer.js"
-import styled from "styled-components"
+// import styled from "styled-components"
 // import image from "../assets/img-orig.jpg"
 import image from "../assets/atsimevu.jpg"
 import titleImg from "../assets/title-TamTamFam2.png"
@@ -12,6 +12,8 @@ import SvgConga1 from "../assets/conga1.svg"
 import SvgDjembe1 from "../assets/djembe1.svg"
 import dancersImg from "../assets/dancexx.jpg"
 import calendarImg from "../assets/calendar.png"
+// import communityImg from "../assets/community.svg"
+import dancers2Img from "../assets/dancers.svg"
 
 const calc = (x, y) => [
   -(y - window.innerHeight / 2) / 20,
@@ -100,13 +102,13 @@ const SvgPolygon = ({ color }) => {
   )
 }
 
-const WallpaperSlant = () => {
+const WallpaperSlant = ({color}) => {
   return (
     <div
       className="absolute bottom-0 left-0 right-0 top-auto w-full overflow-hidden pointer-events-none"
       style={{ height: "70px", transform: "translateZ(0)" }}
     >
-      <SvgPolygon color="text-ttfgray" />
+      <SvgPolygon color={color || "text-ttfgray"} />
     </div>
   )
 }
@@ -119,6 +121,23 @@ const WallpaperSlant2 = ({ color }) => {
     >
       <SvgPolygon color={color} />
     </div>
+  )
+}
+
+const ListElement = (props) => {
+  return (
+    <li className="py-2">
+      <div className="flex items-center">
+        <div>
+          <span className="inline-block px-2 py-1 mr-3 text-xs font-semibold text-pink-600 uppercase rounded-full bg-ttfyellow">
+            {props.children}
+          </span>
+        </div>
+        <div>
+          <h4 className="text-gray-600">{props.text || "needs text"}</h4>
+        </div>
+      </div>
+    </li>
   )
 }
 
@@ -283,8 +302,8 @@ export default function Landing() {
           </div>
         </section>
 
-        <section className="relative py-20 bg-ttfgreen-3">
-          <WallpaperSlant2 color="text-ttfgreen-3" />
+        <section className="relative py-20 bg-ttfgray-4">
+          <WallpaperSlant2 color="text-ttfgray-4" />
           <div className="container px-4 mx-auto">
             <div className="flex flex-wrap items-center">
               <div className="w-full px-4 ml-auto mr-auto md:w-4/12">
@@ -296,56 +315,27 @@ export default function Landing() {
               </div>
               <div className="w-full px-4 ml-auto mr-auto md:w-5/12">
                 <div className="md:pr-12">
-                  <div className="inline-flex items-center justify-center w-16 h-16 p-3 mb-6 text-center text-pink-600 bg-pink-300 rounded-full shadow-lg">
+                  <div className="inline-flex items-center justify-center w-16 h-16 p-3 mb-6 text-center rounded-full shadow-lg bg-ttfyellow">
                     <i className="text-xl fas fa-rocket"></i>
                   </div>
-                  <h3 className="text-3xl font-semibold">A growing company</h3>
+                  <h3 className="text-3xl font-semibold">Socialize</h3>
                   <p className="mt-4 text-lg leading-relaxed text-gray-600">
-                    The extension comes with three pre-built pages to help you
-                    get started faster. You can change the text and images and
-                    you're good to go.
+                    An online place for all drummers, dancers, and their friends
+                    to chat, create & join events, post news, meet each other,
+                    and who know what else.
                   </p>
                   <ul className="mt-6 list-none">
-                    <li className="py-2">
-                      <div className="flex items-center">
-                        <div>
-                          <span className="inline-block px-2 py-1 mr-3 text-xs font-semibold text-pink-600 uppercase bg-pink-200 rounded-full">
-                            <i className="fas fa-fingerprint"></i>
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className="text-gray-600">
-                            Carefully crafted components
-                          </h4>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="py-2">
-                      <div className="flex items-center">
-                        <div>
-                          <span className="inline-block px-2 py-1 mr-3 text-xs font-semibold text-pink-600 uppercase bg-pink-200 rounded-full">
-                            <i className="fab fa-html5"></i>
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className="text-gray-600">
-                            Amazing page examples
-                          </h4>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="py-2">
-                      <div className="flex items-center">
-                        <div>
-                          <span className="inline-block px-2 py-1 mr-3 text-xs font-semibold text-pink-600 uppercase bg-pink-200 rounded-full">
-                            <i className="far fa-paper-plane"></i>
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className="text-gray-600">Dynamic components</h4>
-                        </div>
-                      </div>
-                    </li>
+                    <ListElement text="Dancers">
+                      <img src={dancers2Img} width="20px" alt="community" />
+                    </ListElement>
+
+                    <ListElement text="Drummers">
+                      <i className="fab fa-html5"></i>
+                    </ListElement>
+
+                    <ListElement text="Everybody">
+                      <i className="far fa-paper-plane"></i>
+                    </ListElement>
                   </ul>
                 </div>
               </div>
@@ -353,17 +343,16 @@ export default function Landing() {
           </div>
         </section>
 
-        <section className="pt-20 pb-48 bg-ttfmustard">
+        <section className="pt-20 pb-48 bg-ttfgray-3">
           <div className="container px-4 mx-auto">
             <div className="flex flex-wrap justify-center mb-24 text-center">
               <div className="w-full px-4 lg:w-6/12">
                 <h2 className="text-4xl font-semibold">
-                  Here are somet things planned
+                  Some people you might find on this site...
                 </h2>
                 <p className="m-4 text-lg leading-relaxed text-gray-600">
-                  In the works is a whole host of functionality including social
-                  stuff you're already used to, and scheduling, and chat, and
-                  more!
+                  Hey right now its bare bones but before long we'll have
+                  all the big names on here!
                 </p>
               </div>
             </div>
@@ -377,30 +366,11 @@ export default function Landing() {
                     style={{ maxWidth: "120px" }}
                   />
                   <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Ryan Tompson</h5>
+                    <h5 className="text-xl font-bold">Mamady Keitoff</h5>
                     <p className="mt-1 text-sm font-semibold text-gray-500 uppercase">
-                      Web Developer
+                      Djembefola
                     </p>
-                    <div className="mt-6">
-                      <button
-                        className="w-8 h-8 mb-1 mr-1 text-white bg-blue-400 rounded-full outline-none focus:outline-none"
-                        type="button"
-                      >
-                        <i className="fab fa-twitter"></i>
-                      </button>
-                      <button
-                        className="w-8 h-8 mb-1 mr-1 text-white bg-blue-600 rounded-full outline-none focus:outline-none"
-                        type="button"
-                      >
-                        <i className="fab fa-facebook-f"></i>
-                      </button>
-                      <button
-                        className="w-8 h-8 mb-1 mr-1 text-white bg-pink-500 rounded-full outline-none focus:outline-none"
-                        type="button"
-                      >
-                        <i className="fab fa-dribbble"></i>
-                      </button>
-                    </div>
+
                   </div>
                 </div>
               </div>
@@ -413,24 +383,11 @@ export default function Landing() {
                     style={{ maxWidth: "120px" }}
                   />
                   <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Romina Hadid</h5>
+                    <h5 className="text-xl font-bold">Sade</h5>
                     <p className="mt-1 text-sm font-semibold text-gray-500 uppercase">
-                      Marketing Specialist
+                      Singer / Songwriter
                     </p>
-                    <div className="mt-6">
-                      <button
-                        className="w-8 h-8 mb-1 mr-1 text-white bg-red-600 rounded-full outline-none focus:outline-none"
-                        type="button"
-                      >
-                        <i className="fab fa-google"></i>
-                      </button>
-                      <button
-                        className="w-8 h-8 mb-1 mr-1 text-white bg-blue-600 rounded-full outline-none focus:outline-none"
-                        type="button"
-                      >
-                        <i className="fab fa-facebook-f"></i>
-                      </button>
-                    </div>
+
                   </div>
                 </div>
               </div>
@@ -443,30 +400,11 @@ export default function Landing() {
                     style={{ maxWidth: "120px" }}
                   />
                   <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Alexa Smith</h5>
+                    <h5 className="text-xl font-bold">Asiana Elvis</h5>
                     <p className="mt-1 text-sm font-semibold text-gray-500 uppercase">
-                      UI/UX Designer
+                      Invented Pilates
                     </p>
-                    <div className="mt-6">
-                      <button
-                        className="w-8 h-8 mb-1 mr-1 text-white bg-red-600 rounded-full outline-none focus:outline-none"
-                        type="button"
-                      >
-                        <i className="fab fa-google"></i>
-                      </button>
-                      <button
-                        className="w-8 h-8 mb-1 mr-1 text-white bg-blue-400 rounded-full outline-none focus:outline-none"
-                        type="button"
-                      >
-                        <i className="fab fa-twitter"></i>
-                      </button>
-                      <button
-                        className="w-8 h-8 mb-1 mr-1 text-white bg-gray-800 rounded-full outline-none focus:outline-none"
-                        type="button"
-                      >
-                        <i className="fab fa-instagram"></i>
-                      </button>
-                    </div>
+
                   </div>
                 </div>
               </div>
@@ -479,36 +417,10 @@ export default function Landing() {
                     style={{ maxWidth: "120px" }}
                   />
                   <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Jenna Kardi</h5>
+                    <h5 className="text-xl font-bold">Rebecca</h5>
                     <p className="mt-1 text-sm font-semibold text-gray-500 uppercase">
-                      Founder and CEO
+                      Some chic
                     </p>
-                    <div className="mt-6">
-                      <button
-                        className="w-8 h-8 mb-1 mr-1 text-white bg-pink-500 rounded-full outline-none focus:outline-none"
-                        type="button"
-                      >
-                        <i className="fab fa-dribbble"></i>
-                      </button>
-                      <button
-                        className="w-8 h-8 mb-1 mr-1 text-white bg-red-600 rounded-full outline-none focus:outline-none"
-                        type="button"
-                      >
-                        <i className="fab fa-google"></i>
-                      </button>
-                      <button
-                        className="w-8 h-8 mb-1 mr-1 text-white bg-blue-400 rounded-full outline-none focus:outline-none"
-                        type="button"
-                      >
-                        <i className="fab fa-twitter"></i>
-                      </button>
-                      <button
-                        className="w-8 h-8 mb-1 mr-1 text-white bg-gray-800 rounded-full outline-none focus:outline-none"
-                        type="button"
-                      >
-                        <i className="fab fa-instagram"></i>
-                      </button>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -516,134 +428,6 @@ export default function Landing() {
           </div>
         </section>
 
-        <section className="relative block pb-20 bg-gray-900">
-          <WallpaperSlant2 color="text-gray-900" />
-
-          <div className="container px-4 mx-auto lg:pt-24 lg:pb-64">
-            <div className="flex flex-wrap justify-center text-center">
-              <div className="w-full px-4 lg:w-6/12">
-                <h2 className="text-4xl font-semibold text-white">
-                  Build something
-                </h2>
-                <p className="mt-4 mb-4 text-lg leading-relaxed text-gray-500">
-                  Put the potentially record low maximum sea ice extent tihs
-                  year down to low ice. According to the National Oceanic and
-                  Atmospheric Administration, Ted, Scambos.
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-wrap justify-center mt-12">
-              <div className="w-full px-4 text-center lg:w-3/12">
-                <div className="inline-flex items-center justify-center w-12 h-12 p-3 text-gray-900 bg-white rounded-full shadow-lg">
-                  <i className="text-xl fas fa-medal"></i>
-                </div>
-                <h6 className="mt-5 text-xl font-semibold text-white">
-                  Excelent Services
-                </h6>
-                <p className="mt-2 mb-4 text-gray-500">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-              </div>
-              <div className="w-full px-4 text-center lg:w-3/12">
-                <div className="inline-flex items-center justify-center w-12 h-12 p-3 text-gray-900 bg-white rounded-full shadow-lg">
-                  <i className="text-xl fas fa-poll"></i>
-                </div>
-                <h5 className="mt-5 text-xl font-semibold text-white">
-                  Grow your market
-                </h5>
-                <p className="mt-2 mb-4 text-gray-500">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-              </div>
-              <div className="w-full px-4 text-center lg:w-3/12">
-                <div className="inline-flex items-center justify-center w-12 h-12 p-3 text-gray-900 bg-white rounded-full shadow-lg">
-                  <i className="text-xl fas fa-lightbulb"></i>
-                </div>
-                <h5 className="mt-5 text-xl font-semibold text-white">
-                  Launch time
-                </h5>
-                <p className="mt-2 mb-4 text-gray-500">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="relative block py-24 bg-gray-900 lg:pt-0">
-          <div className="container px-4 mx-auto">
-            <div className="flex flex-wrap justify-center -mt-48 lg:-mt-64">
-              <div className="w-full px-4 lg:w-6/12">
-                <div className="relative flex flex-col w-full min-w-0 mb-6 break-words bg-gray-300 rounded-lg shadow-lg">
-                  <div className="flex-auto p-5 lg:p-10">
-                    <h4 className="text-2xl font-semibold">
-                      Want to work with us?
-                    </h4>
-                    <p className="mt-1 mb-4 leading-relaxed text-gray-600">
-                      Complete this form and we will get back to you in 24
-                      hours.
-                    </p>
-                    <div className="relative w-full mt-8 mb-3">
-                      <label
-                        className="block mb-2 text-xs font-bold text-gray-700 uppercase"
-                        htmlFor="full-name"
-                      >
-                        Full Name
-                      </label>
-                      <input
-                        type="text"
-                        className="w-full px-3 py-3 text-sm text-gray-700 placeholder-gray-400 bg-white rounded shadow focus:outline-none focus:shadow-outline"
-                        placeholder="Full Name"
-                        style={{ transition: "all .15s ease" }}
-                      />
-                    </div>
-
-                    <div className="relative w-full mb-3">
-                      <label
-                        className="block mb-2 text-xs font-bold text-gray-700 uppercase"
-                        htmlFor="email"
-                      >
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        className="w-full px-3 py-3 text-sm text-gray-700 placeholder-gray-400 bg-white rounded shadow focus:outline-none focus:shadow-outline"
-                        placeholder="Email"
-                        style={{ transition: "all .15s ease" }}
-                      />
-                    </div>
-
-                    <div className="relative w-full mb-3">
-                      <label
-                        className="block mb-2 text-xs font-bold text-gray-700 uppercase"
-                        htmlFor="message"
-                      >
-                        Message
-                      </label>
-                      <textarea
-                        rows="4"
-                        cols="80"
-                        className="w-full px-3 py-3 text-sm text-gray-700 placeholder-gray-400 bg-white rounded shadow focus:outline-none focus:shadow-outline"
-                        placeholder="Type a message..."
-                      />
-                    </div>
-                    <div className="mt-6 text-center">
-                      <button
-                        className="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase bg-gray-900 rounded shadow outline-none active:bg-gray-700 hover:shadow-lg focus:outline-none"
-                        type="button"
-                        style={{ transition: "all .15s ease" }}
-                      >
-                        Send Message
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
       <Footer />
     </>

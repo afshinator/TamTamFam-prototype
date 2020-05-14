@@ -1,7 +1,10 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState } from "react"
 import { useSpring, animated } from "react-spring"
 import pointUp from "../assets/arrow-thick-to-top.svg"
-import { styled } from "styled-components"
+
+const colors = require("../tailwind.config")
+  .theme.extend.colors
+// import { styled } from "styled-components"
 
 const COLLAPSED_HEIGHT = 50
 
@@ -39,12 +42,12 @@ const Card = (props) => {
 
   return (
     <animated.section
-      className="relative max-w-md max-h-screen p-3 m-6 overflow-hidden bg-orange-300 rounded-sm"
+      className="relative max-w-md max-h-screen p-3 m-6 overflow-hidden rounded-sm appCard"
       style={animRangeProps}
     >
       <div className="w-full">
-        <h1 className="text-2xl text-blue-700">{props.title}</h1>
-        <div className="">{props.children}</div>
+        <h3 className="text-2xl ">{props.title}</h3>
+        <div className="cardContent">{props.children}</div>
       </div>
       <CollapseButton />
     </animated.section>

@@ -28,7 +28,7 @@ function useFormValidation(initialState, validate, authenticate, t) {
   }
 
   function handleBlur(e) {
-    const theInput = e.target.name
+    // const theInput = e.target.name
     const validationErrors = validate(values, t)
     console.log("~> ", e.target.name, validationErrors)
 
