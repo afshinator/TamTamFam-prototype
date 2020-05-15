@@ -4,14 +4,16 @@ const colors = require("../tailwind.config")
 // console.info("COLORS ", colors)
 
 export const lightTheme = {
-  body: colors['ttfgray'], // ttfgray-1
-  text: colors['ttfdkgreen'],
-  cardBkgd: colors['ttfgray1'],
-
+  body: colors['manatee'],
+  nav: colors['periwinkle'],
+  text: colors['oxfordBlue'],
+  cardBkgd: colors['khaki'],
 }
+
 export const darkTheme = {
-  body: colors['ttfdkgreen'],
-  text: colors['ttfgray'],
-  cardBkgd: colors['ttfblack'],
+  body: colors['graniteGrey'],
+  nav: colors['darkLava'],
+  text: colors['ivory'],
+  // cardBkgd: colors['rifleGreen'],
 
 }

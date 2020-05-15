@@ -12,6 +12,9 @@ export const GlobalStyles = createGlobalStyle`
     font-family: "Oxygen-Regular";
     transition: all 0.50s linear;
   }
+  nav {
+    background: ${({ theme }) => theme.nav};
+  }
   .appCard {
     background: ${({ theme }) => theme.cardBkgd};
     color: ${({ theme }) => theme.cardTxt};
