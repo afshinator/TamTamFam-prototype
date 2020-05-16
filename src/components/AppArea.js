@@ -15,7 +15,6 @@ import useAuth from "./Auth/useAuth"
 import firebase, { FirebaseContext } from "../firebase"
 import LandingPage from "../pages/Landing"
 
-
 function AppArea(props) {
   // const {  } = props
   const [theme, setTheme] = useLocalStorage("lightOrDark")
@@ -24,12 +23,14 @@ function AppArea(props) {
     theme === "light" ? setTheme("dark") : setTheme("light")
   }
 
+  console.log("appArea ", user)
+
   useEffect(() => {
     // document.body.style.backgroundSize = "cover"
     // document.body.style.backgroundRepeat = "no-repeat"
     // document.body.style.backgroundImage = `url(${image})`
-    if ( !theme ) setTheme("light")
-  }, [])  // eslint-disable-line react-hooks/exhaustive-deps
+    if (!theme) setTheme("light")
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>

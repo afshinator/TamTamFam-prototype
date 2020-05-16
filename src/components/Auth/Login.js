@@ -58,13 +58,6 @@ function Login(props) {
   }
 
   const readyToSubmit = !isSubmitting && Object.keys(errors).length < 2
-  //  (!login && Object.keys(errors).length === 0) )
-
-  // const readyToSubmit = !isSubmitting &&
-  //   ( (login && Object.keys(errors).length === 1 && errors['name'])
-  //   || (!login && Object.keys(errors).length === 0) )
-
-  // console.log('ready to submit ', Object.keys(errors).length, errors, readyToSubmit)
 
   return (
     <>

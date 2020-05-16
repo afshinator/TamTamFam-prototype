@@ -6,7 +6,6 @@ import useLocalStorage from "./../utils/useLocalStorage"
 import useGeolocation from "./../utils/useGeolocation"
 import AppArea from "./AppArea"
 
-
 function App() {
   const [visitCount, setVisitCount] = useLocalStorage("vs")
   const [lastTimestamp, setLastTimestamp] = useLocalStorage("ts")
