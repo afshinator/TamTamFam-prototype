@@ -7,13 +7,13 @@ export const lightTheme = {
   body: colors['manatee'],
   nav: colors['periwinkle'],
   text: colors['oxfordBlue'],
-  cardBkgd: colors['khaki'],
+  cardBkgd: colors['periwinkle'],
 }
 
 export const darkTheme = {
   body: colors['graniteGrey'],
   nav: colors['darkLava'],
   text: colors['ivory'],
-  // cardBkgd: colors['rifleGreen'],
+  cardBkgd: colors['khaki'],
 
 }

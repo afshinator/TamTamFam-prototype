@@ -1,15 +1,28 @@
 import { createGlobalStyle } from "styled-components"
-import oxygen from "../assets/Oxygen-Regular.ttf"
+import andika from "../assets/fonts/Andika-Regular.ttf"
+import openSans from "../assets/fonts/OpenSans-Regular.ttf"
+import openSansSBI from "../assets/fonts/OpenSans-SemiBoldItalic.ttf"
 
 export const GlobalStyles = createGlobalStyle`
   @font-face {
-    font-family: "Oxygen-Regular";
-    src: url(${oxygen});
+    font-family: "Andika-Regular";
+    src: url(${andika});
+  }
+  @font-face {
+    font-family: "OpenSans-Regular";
+    src: url(${openSans});
+  }
+  @font-face {
+    font-family: "OpenSans-SemiBoldItalic";
+    src: url(${openSansSBI});
+  }
+  h1, h2, h3 {
+    font-family: "OpenSans-SemiBoldItalic";
   }
   body {
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
-    font-family: "Oxygen-Regular";
+    font-family: "OpenSans-Regular";
     transition: all 0.50s linear;
   }
   nav {

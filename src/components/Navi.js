@@ -1,7 +1,7 @@
 import React from "react"
 import { withRouter, NavLink } from "react-router-dom"
 import { FirebaseContext } from "../firebase"
-import titleImg from "../assets/site-title.png"
+import titleImg from "../assets/title2.png"
 
 function Navi(props) {
   const { user, firebase } = React.useContext(FirebaseContext)
@@ -10,13 +10,13 @@ function Navi(props) {
   // https://github.com/tailwindtoolbox/Responsive-Header/blob/master/responsive-header_v0.html
 
   return (
-    <nav className="z-10 flex flex-wrap items-center justify-between w-full p-6 ">
+    <nav className="z-10 flex flex-wrap items-center justify-between w-full p-3 ">
       <div className="flex items-center mr-6 text-white flex-no-shrink">
         <NavLink
-          className="text-white no-underline hover:text-white hover:no-underline"
+          className="ml-3 text-white no-underline hover:text-white hover:no-underline"
           to="/"
         >
-          <img src={titleImg} width="220px" alt="TamTamFam" />
+          <img src={titleImg} width="130px" alt="TamTamFam" />
         </NavLink>
       </div>
 

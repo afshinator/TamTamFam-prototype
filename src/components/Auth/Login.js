@@ -6,9 +6,11 @@ import useFormValidation from "./../../utils/useFormValidation"
 import validateLogin from "./../../utils/validateLogin"
 import firebase from "./../../firebase"
 import Navi from "../Navi"
+import userImg from "../../assets/icons/user.svg"
+import keyImg from "../../assets/icons/key.svg"
 
-const ERROR = "text-red-600"
-const PLACEHOLDER = <p className="p-3"></p>
+const ERROR = "text-xs font-bold text-redSalsa"
+const PLACEHOLDER = <p className={`${ERROR} opacity-0`}>_</p>
 
 const EMPTY_FORM = {
   name: "",
@@ -19,7 +21,7 @@ const EMPTY_FORM = {
 // Login is both the Login and the Create Account form - for now
 function Login(props) {
   const { t } = useTranslation(["app"])
-  const loginTxt = t("app:auth:login", "Login")
+  const loginTxt = t("app:auth:login", "Login").toUpperCase()
   const createAcctTxt = t("app:auth:createAccount", "Create Account")
   const nameTxt = t("app:auth:name", "Name")
   const emailTxt = t("app:auth:email", "Email")
@@ -64,6 +66,90 @@ function Login(props) {
 
   // console.log('ready to submit ', Object.keys(errors).length, errors, readyToSubmit)
 
+  return (
+    <>
+      <Navi />
+      <div className="flex flex-col-reverse self-center max-w-4xl mx-auto mt-12 shadow-lg sm:flex-row">
+        <div className="w-full p-4 bg-ivory">
+          <div className="text-gray-700">
+            <h2>{login ? loginTxt : createAcctTxt}</h2>
+            <p className="mt-2 text-xs text-gray-base">
+              Please enter your email and password to log in
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="transition">
+            <div className="mt-3">
+              <span className="flex items-center px-3 bg-gray-300">
+                <img src={userImg} className="opacity-25" alt="user icon" />
+                <input
+                  className="w-full p-2 bg-gray-300"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.email}
+                  placeholder={emailTxt}
+                  type="email"
+                  name="email"
+                />
+              </span>
+              {errors.email ? (
+                <p className={ERROR}>{errors.email}</p>
+              ) : (
+                PLACEHOLDER
+              )}
+              <span className="flex items-center px-3 mt-2 bg-gray-300">
+                <img src={keyImg} className="opacity-25" alt="key icon" />
+                <input
+                  className={"w-full p-2 bg-gray-300"}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                  type="password"
+                  name="password"
+                  placeholder={choosePwTxt}
+                />
+              </span>
+              {errors.password ? (
+                <p className={ERROR}>{errors.password}</p>
+              ) : (
+                PLACEHOLDER
+              )}
+              {firebaseError && <p className={ERROR}>{firebaseError}</p>}
+            </div>
+            <hr />
+            <div className="flex items-center justify-between mt-4">
+              <button
+                className="px-4 py-2 text-white bg-blue-500 hover:bg-blue-400"
+                disabled={!readyToSubmit}
+                type="submit"
+              >
+                {submitTxt}
+              </button>
+
+              <Link
+                className="text-xs text-blue-400 underline-none hover:text-blue-600"
+                to="/forgot"
+              >
+                {forgetPw}
+              </Link>
+            </div>
+          </form>
+        </div>
+        <div className="flex flex-col justify-center w-full p-4 text-center text-white bg-darkLava ">
+          <h4>Sign in or Sign up</h4>
+          <p className="mt-2 text-sm">
+            Welcome back, log in or if you don't have an account, click below to
+            go to register
+          </p>
+          <button className="w-3/5 px-4 py-2 mx-auto mt-4 text-sm text-white bg-blue-700 hover:bg-blue-600">
+            Need an Account? REGISTER
+          </button>
+        </div>
+      </div>
+    </>
+  )
+
+  /*
   return (
     <>
       <Navi />
@@ -137,6 +223,7 @@ function Login(props) {
       </Card>
     </>
   )
+  */
 }
 
 export default Login
