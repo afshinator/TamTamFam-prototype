@@ -1,10 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import Card from "./../Card"
-import useFormValidation from "./../../utils/useFormValidation"
-import validateLogin from "./../../utils/validateLogin"
 import firebase from "./../../firebase"
+import useFormValidation from "./../../utils/useFormValidation"
+import validateRegistration from "./../../utils/validateRegistration"
 import Navi from "../Navi"
 import userImg from "../../assets/icons/user.svg"
 import keyImg from "../../assets/icons/key.svg"
@@ -18,20 +17,17 @@ const EMPTY_FORM = {
   password: "",
 }
 
-// Login is both the Login and the Create Account form - for now
-function Login(props) {
+function Register(props) {
   const { t } = useTranslation(["app"])
-  const loginTxt = t("app:auth:login", "Login").toUpperCase()
   const createAcctTxt = t("app:auth:createAccount", "Create Account")
-  const nameTxt = t("app:auth:name", "Name")
+  const fnameTxt = t("app:auth:fname", "First Name")
+  const lnameTxt = t("app:auth:lname", "Last Name")
   const emailTxt = t("app:auth:email", "Email")
   const choosePwTxt = t("app:auth:choosePw", "Choose Password")
-  const needAcctTxt = t("app:auth:needAccount", "Need Account?")
   const haveAcctTxt = t("app:auth:haveAccount", "Have Account?")
   const submitTxt = t("app:btn:submit", "Submit")
-  const forgetPw = t("app:auth:forgetPw", "Forget pw?")
 
-  const [login, setLogin] = React.useState(true)
+
   const [firebaseError, setFirebaseError] = React.useState(null)
 
   const {
@@ -41,23 +37,21 @@ function Login(props) {
     values,
     errors,
     isSubmitting,
-  } = useFormValidation(EMPTY_FORM, validateLogin, authenticateUser, t)
+  } = useFormValidation(EMPTY_FORM, validateRegistration, registerUser, t)
 
-  async function authenticateUser() {
+  const readyToSubmit = !isSubmitting // && Object.keys(errors).length < 2
+
+  async function registerUser() {
     const { name, email, password } = values
 
     try {
-      const response = login
-        ? await firebase.login(email, password)
-        : await firebase.register(name, email, password)
+      const response = await firebase.register(name, email, password)
       console.log("response ", { response })
     } catch (err) {
-      console.error("Authentication Error", err)
+      console.error("Registration Error", err)
       setFirebaseError(err.message)
     }
   }
-
-  const readyToSubmit = !isSubmitting && Object.keys(errors).length < 2
 
   return (
     <>
@@ -65,14 +59,31 @@ function Login(props) {
       <div className="flex flex-col-reverse self-center max-w-md mx-auto mt-12 shadow-lg sm:flex-row">
         <div className="w-full p-4 bg-ivory">
           <div className="text-gray-700">
-            <h2>{login ? loginTxt : createAcctTxt}</h2>
+            <h2>{createAcctTxt}</h2>
             <p className="mt-2 text-xs text-gray-base">
-              Please enter your email and password to log in
+              Please enter all your information to get registered
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="transition">
             <div className="mt-3">
+              <span className="flex items-center px-3 bg-gray-300">
+                <img src={userImg} className="opacity-25" alt="first name" />
+                <input
+                  className="w-full p-2 bg-gray-300"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.fname}
+                  placeholder={fnameTxt}
+                  type="text"
+                  name="fname"
+                />
+              </span>
+              {errors.fname ? (
+                <p className={ERROR}>{errors.fname}</p>
+              ) : (
+                PLACEHOLDER
+              )}
               <span className="flex items-center px-3 bg-gray-300">
                 <img src={userImg} className="opacity-25" alt="user icon" />
                 <input
@@ -121,15 +132,9 @@ function Login(props) {
 
               <Link
                 className="text-xs text-blue-400 underline-none hover:text-blue-600"
-                to="/forgot"
+                to="/login"
               >
-                {forgetPw}
-              </Link>
-              <Link
-                className="text-xs text-blue-400 underline-none hover:text-blue-600"
-                to="/register"
-              >
-                {needAcctTxt}
+                {haveAcctTxt}
               </Link>
             </div>
           </form>
@@ -137,82 +142,6 @@ function Login(props) {
       </div>
     </>
   )
-
-  /*
-  return (
-    <>
-      <Navi />
-      <Card title={login ? loginTxt : createAcctTxt}>
-        <form onSubmit={handleSubmit} className="flex flex-col mt-5 transition">
-          {!login && (
-            <>
-              <input
-                type="text"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.name}
-                name="name"
-                placeholder={nameTxt}
-                autoComplete="off"
-                className="mb-2"
-              />
-              {errors.name ? (
-                <p className={ERROR}>{errors.name}</p>
-              ) : (
-                PLACEHOLDER
-              )}
-            </>
-          )}
-          <input
-            type="email"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
-            name="email"
-            placeholder={emailTxt}
-            autoComplete="off"
-          />
-          {errors.email ? <p className={ERROR}>{errors.email}</p> : PLACEHOLDER}
-
-          <input
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.password}
-            className={`mt-2 ${errors.password && ERROR}`}
-            type="password"
-            name="password"
-            placeholder={choosePwTxt}
-          />
-          {errors.password ? (
-            <p className={ERROR}>{errors.password}</p>
-          ) : (
-            PLACEHOLDER
-          )}
-          {firebaseError && <p className="error-text">{firebaseError}</p>}
-          <button
-            type="submit"
-            className="p-2 mt-5 mr-2 pointer"
-            disabled={!readyToSubmit}
-            style={{ background: !readyToSubmit ? "grey" : "black" }}
-          >
-            {submitTxt}
-          </button>
-
-          <button
-            type="button"
-            className="mb-3 pointer"
-            onClick={() => setLogin((prevLogin) => !prevLogin)}
-          >
-            {login ? needAcctTxt : haveAcctTxt}
-          </button>
-        </form>
-        <div className="">
-          <Link to="/forgot">{forgetPw}</Link>
-        </div>
-      </Card>
-    </>
-  )
-  */
 }
 
-export default Login
+export default Register

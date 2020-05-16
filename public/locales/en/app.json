@@ -5,6 +5,8 @@
     "createAccount" : "Create Account",
     "name": "Name",
     "email": "Email",
+    "fname": "First Name",
+    "lname": "Last Name",
     "password": "Password",
     "choosePw": "Choose a secure password",
     "needAccount": "Need to create an account?",

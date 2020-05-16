@@ -10,6 +10,7 @@ import ThemeToggler from "./ThemeToggler"
 import useLocalStorage from "./../utils/useLocalStorage"
 // import { useTranslation } from "react-i18next"
 import Login from "./Auth/Login"
+import Register from "./Auth/Register"
 import ForgotPassword from "./Auth/ForgotPassword"
 import useAuth from "./Auth/useAuth"
 import firebase, { FirebaseContext } from "../firebase"
@@ -41,6 +42,7 @@ function AppArea(props) {
             {/* <Route exact path="/" render={() => <Redirect to="/landing" />} /> */}
             <Route path="/landing" component={LandingPage} />
             <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
             <Route path="/forgot" component={ForgotPassword} />
           </Switch>
           <ThemeToggler theme={theme} toggleTheme={toggleTheme} />

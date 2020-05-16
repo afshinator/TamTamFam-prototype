@@ -5,6 +5,8 @@
     "createAccount" : "Crear cuenta",
     "name": "Nombre",
     "email": "Correo electrónico",
+    "fname": "Nombre de pila",
+    "lname": "Apellido",    
     "password": "Contraseña",
     "choosePw": "Elija una contraseña segura",
     "needAccount": "Necesita crear una cuenta?",
