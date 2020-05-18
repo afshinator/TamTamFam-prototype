@@ -1,7 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import Card from "./../Card"
 import useFormValidation from "./../../utils/useFormValidation"
 import validateLogin from "./../../utils/validateLogin"
 import firebase from "./../../firebase"
@@ -9,8 +8,57 @@ import Navi from "../Navi"
 import userImg from "../../assets/icons/user.svg"
 import keyImg from "../../assets/icons/key.svg"
 
-const ERROR = "text-xs font-bold text-redSalsa"
+const ERROR = "text-xs font-bold text-intlOrange"
 const PLACEHOLDER = <p className={`${ERROR} opacity-0`}>_</p>
+
+const CardTitle = (props) => {
+  return (
+    <div className="mb-6">
+      <h2 className="text-xl">{props.title}</h2>
+      <p className="text-sm ">{props.children}</p>
+    </div>
+  )
+}
+
+const InputBox = (props) => {
+  const [hasFocus, setFocus] = React.useState(false)
+  const classes = `${ hasFocus ? 'border-intlOrange': 'border-transparent'} box-content border-2 flex items-center mt-4 bg-ivory`
+  return (
+    <>
+      <span className={classes}>
+        <img src={props.src} className="opacity-25 " alt={props.alt} />
+        <input
+          className={"w-full p-2"}
+          onFocus={()=>{ setFocus(true) }}
+          onChange={props.handleChange}
+          onBlur={(e)=>{ props.handleBlur(e); setFocus(false);}}
+          value={props.values[props.field]}
+          type={props.field}
+          name={props.field}
+          placeholder={props.placeholder}
+        />
+      </span>
+      <span>
+        {props.errors[props.field] ? (
+          <p className={ERROR}>{props.errors[props.field]}</p>
+        ) : (
+          PLACEHOLDER
+        )}
+      </span>
+    </>
+  )
+}
+
+const LinkTo = (props) => {
+  return (
+    <Link
+      className="text-sm text-rifleGreen underline-none hover:text-bistre"
+      to={props.to}
+    >
+      {props.text}
+    </Link>
+  )
+}
 
 const EMPTY_FORM = {
   name: "",
@@ -18,20 +66,15 @@ const EMPTY_FORM = {
   password: "",
 }
 
-// Login is both the Login and the Create Account form - for now
 function Login(props) {
   const { t } = useTranslation(["app"])
   const loginTxt = t("app:auth:login", "Login").toUpperCase()
-  const createAcctTxt = t("app:auth:createAccount", "Create Account")
-  const nameTxt = t("app:auth:name", "Name")
   const emailTxt = t("app:auth:email", "Email")
   const choosePwTxt = t("app:auth:choosePw", "Choose Password")
   const needAcctTxt = t("app:auth:needAccount", "Need Account?")
-  const haveAcctTxt = t("app:auth:haveAccount", "Have Account?")
   const submitTxt = t("app:btn:submit", "Submit")
   const forgetPw = t("app:auth:forgetPw", "Forget pw?")
 
-  const [login, setLogin] = React.useState(true)
   const [firebaseError, setFirebaseError] = React.useState(null)
 
   const {
@@ -44,12 +87,10 @@ function Login(props) {
   } = useFormValidation(EMPTY_FORM, validateLogin, authenticateUser, t)
 
   async function authenticateUser() {
-    const { name, email, password } = values
+    const { email, password } = values
 
     try {
-      const response = login
-        ? await firebase.login(email, password)
-        : await firebase.register(name, email, password)
+      const response = await firebase.login(email, password)
       console.log("response ", { response })
     } catch (err) {
       console.error("Authentication Error", err)
@@ -63,53 +104,37 @@ function Login(props) {
     <>
       <Navi />
       <div className="flex flex-col-reverse self-center max-w-md mx-auto mt-12 shadow-lg sm:flex-row">
-        <div className="w-full p-4 bg-ivory">
-          <div className="text-gray-700">
-            <h2>{login ? loginTxt : createAcctTxt}</h2>
-            <p className="mt-2 text-xs text-gray-base">
-              Please enter your email and password to log in
-            </p>
-          </div>
+        <div className="w-full p-4 bg-red-100 appCard ">
+          <CardTitle title={loginTxt}>
+            Please enter your email and password to log in
+          </CardTitle>
 
           <form onSubmit={handleSubmit} className="transition">
             <div className="mt-3">
-              <span className="flex items-center px-3 bg-gray-300">
-                <img src={userImg} className="opacity-25" alt="user icon" />
-                <input
-                  className="w-full p-2 bg-gray-300"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.email}
-                  placeholder={emailTxt}
-                  type="email"
-                  name="email"
-                />
-              </span>
-              {errors.email ? (
-                <p className={ERROR}>{errors.email}</p>
-              ) : (
-                PLACEHOLDER
-              )}
-              <span className="flex items-center px-3 mt-2 bg-gray-300">
-                <img src={keyImg} className="opacity-25" alt="key icon" />
-                <input
-                  className={"w-full p-2 bg-gray-300"}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
-                  type="password"
-                  name="password"
-                  placeholder={choosePwTxt}
-                />
-              </span>
-              {errors.password ? (
-                <p className={ERROR}>{errors.password}</p>
-              ) : (
-                PLACEHOLDER
-              )}
+              <InputBox
+                src={userImg}
+                alt="user icon"
+                values={values}
+                errors={errors}
+                field="email"
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                placeholder={emailTxt}
+              />
+              <InputBox
+                src={keyImg}
+                alt="key icon"
+                values={values}
+                errors={errors}
+                field="password"
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                placeholder={choosePwTxt}
+              />
+
               {firebaseError && <p className={ERROR}>{firebaseError}</p>}
             </div>
-            <hr />
+            <hr className="mt-4"/>
             <div className="flex items-center justify-between mt-4">
               <button
                 className="px-4 py-2 text-white bg-blue-500 hover:bg-blue-400"
@@ -118,19 +143,8 @@ function Login(props) {
               >
                 {submitTxt}
               </button>
-
-              <Link
-                className="text-xs text-blue-400 underline-none hover:text-blue-600"
-                to="/forgot"
-              >
-                {forgetPw}
-              </Link>
-              <Link
-                className="text-xs text-blue-400 underline-none hover:text-blue-600"
-                to="/register"
-              >
-                {needAcctTxt}
-              </Link>
+              <LinkTo to="/forgot" text={forgetPw} />
+              <LinkTo to="/register" text={needAcctTxt} />
             </div>
           </form>
         </div>

@@ -8,6 +8,8 @@ export const lightTheme = {
   nav: colors['periwinkle'],
   text: colors['oxfordBlue'],
   cardBkgd: colors['periwinkle'],
+  cardInput: colors['ivory'],
+  inputTxt: colors['oxfordBlue'],
 }
 
 export const darkTheme = {
@@ -15,5 +17,6 @@ export const darkTheme = {
   nav: colors['darkLava'],
   text: colors['ivory'],
   cardBkgd: colors['khaki'],
-
+  cardInput: colors['ivory'],
+  inputTxt: colors['oxfordBlue'],
 }

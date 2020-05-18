@@ -30,11 +30,13 @@ export const GlobalStyles = createGlobalStyle`
   }
   .appCard {
     background: ${({ theme }) => theme.cardBkgd};
-    color: ${({ theme }) => theme.cardTxt};
+    color: ${({ theme }) => theme.text};
   }
-
-  .appCard h3 {
-    color: ${({ theme }) => theme.cardH3};
+  .appCard input {
+    background: ${({ theme }) => theme.cardInput};
+    color: ${({ theme }) => theme.inputTxt};
   }
-
+  .appCard input:focus {
+    outline: none;
+  }
   `
