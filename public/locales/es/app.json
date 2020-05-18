@@ -8,6 +8,7 @@
     "fname": "Nombre de pila",
     "lname": "Apellido",    
     "password": "Contraseña",
+    "loginMsg": "Por favor introduzca su e-mail y contraseña para entrar",
     "choosePw": "Elija una contraseña segura",
     "needAccount": "Necesita crear una cuenta?",
     "haveAccount": "¿Ya tiene una cuenta?",
@@ -17,11 +18,14 @@
     "invalidName": "Nombre inválido",
     "pwRequired": "Se requiere contraseña",
     "pwTooShort": "La contraseña debe tener al menos 6 caracteres",
-    "forgetPw": "¿Se te olvidó tu contraseña?"
+    "forgetPw": "¿Se te olvidó tu contraseña?",
+    "badPw": "La contraseña no es válida, intente nuevamente",
+    "badUser": "¡No hemos podido encontrar a este usuario!"
   },
   "btn" : {
     "ok" : "Bien",
     "cancel" : "Cancelar",
-    "submit": "Enviar"
+    "submit": "Enviar",
+    "login": "Iniciar sesión"
   }
 }

@@ -8,6 +8,7 @@
     "fname": "First Name",
     "lname": "Last Name",
     "password": "Password",
+    "loginMsg": "Please enter your email and password to log in",
     "choosePw": "Choose a secure password",
     "needAccount": "Need to create an account?",
     "haveAccount": "Already have an account?",
@@ -17,11 +18,14 @@
     "invalidName": "Invalid Name",
     "pwRequired": "Password is required",
     "pwTooShort": "Password must be at least 6 characters",
-    "forgetPw": "Forgot Password?"
+    "forgetPw": "Forgot Password?",
+    "badPw": "The password is invalid! Try again.",
+    "badUser": "We were unable to find this user!"
   },
   "btn" : {
     "ok" : "ok",
     "cancel" : "Cancel",
-    "submit": "Submit"
+    "submit": "Submit",
+    "login": "Login"
   }
 }

@@ -8,6 +8,7 @@ import Navi from "../Navi"
 import userImg from "../../assets/icons/user.svg"
 import keyImg from "../../assets/icons/key.svg"
 
+const PW_MIN_LENGTH = 6
 const ERROR = "text-xs font-bold text-intlOrange"
 const PLACEHOLDER = <p className={`${ERROR} opacity-0`}>_</p>
 
@@ -22,16 +23,23 @@ const CardTitle = (props) => {
 
 const InputBox = (props) => {
   const [hasFocus, setFocus] = React.useState(false)
-  const classes = `${ hasFocus ? 'border-intlOrange': 'border-transparent'} box-content border-2 flex items-center mt-4 bg-ivory`
+  const classes = `${
+    hasFocus ? "border-intlOrange" : "border-transparent"
+  } box-content border-2 flex items-center mt-4 bg-ivory`
   return (
     <>
       <span className={classes}>
         <img src={props.src} className="opacity-25 " alt={props.alt} />
         <input
           className={"w-full p-2"}
-          onFocus={()=>{ setFocus(true) }}
+          onFocus={() => {
+            setFocus(true)
+          }}
           onChange={props.handleChange}
-          onBlur={(e)=>{ props.handleBlur(e); setFocus(false);}}
+          onBlur={(e) => {
+            props.handleBlur(e)
+            setFocus(false)
+          }}
           value={props.values[props.field]}
           type={props.field}
           name={props.field}
@@ -60,8 +68,21 @@ const LinkTo = (props) => {
   )
 }
 
+const SubmitButton = (props) => {
+  const classes = `${
+    props.readyToSubmit
+      ? "bg-sandyBrown hover:bg-outOrange"
+      : "cursor-not-allowed bg-manatee"
+  } px-4 py-2 text-white`
+
+  return (
+    <button className={classes} disabled={!props.readyToSubmit} type="submit">
+      {props.txt}
+    </button>
+  )
+}
+
 const EMPTY_FORM = {
-  name: "",
   email: "",
   password: "",
 }
@@ -69,11 +90,13 @@ const EMPTY_FORM = {
 function Login(props) {
   const { t } = useTranslation(["app"])
   const loginTxt = t("app:auth:login", "Login").toUpperCase()
+  const loginMsg = t("app:auth:loginMsg", "Enter credentials")
   const emailTxt = t("app:auth:email", "Email")
   const choosePwTxt = t("app:auth:choosePw", "Choose Password")
   const needAcctTxt = t("app:auth:needAccount", "Need Account?")
-  const submitTxt = t("app:btn:submit", "Submit")
   const forgetPw = t("app:auth:forgetPw", "Forget pw?")
+  const badPwTxt = t("app:auth:badPw", "Bad Pw")
+  const badUserTxt = t("app:auth:badUser", "Bad User")
 
   const [firebaseError, setFirebaseError] = React.useState(null)
 
@@ -94,11 +117,24 @@ function Login(props) {
       console.log("response ", { response })
     } catch (err) {
       console.error("Authentication Error", err)
-      setFirebaseError(err.message)
+      if ( err.message.includes('user may have been deleted')) {
+        setFirebaseError(badUserTxt)
+      }
+      else if ( err.message.includes('password is invalid')) {
+        setFirebaseError(badPwTxt)
+      }
+      else {
+        setFirebaseError(err.message)
+      }
     }
   }
 
-  const readyToSubmit = !isSubmitting && Object.keys(errors).length < 2
+  const readyToSubmit =
+    !isSubmitting &&
+    !firebaseError &&
+    Object.keys(errors).length === 0 &&
+    values.email &&
+    values.password.length >= PW_MIN_LENGTH
 
   return (
     <>
@@ -106,7 +142,7 @@ function Login(props) {
       <div className="flex flex-col-reverse self-center max-w-md mx-auto mt-12 shadow-lg sm:flex-row">
         <div className="w-full p-4 bg-red-100 appCard ">
           <CardTitle title={loginTxt}>
-            Please enter your email and password to log in
+            {loginMsg}
           </CardTitle>
 
           <form onSubmit={handleSubmit} className="transition">
@@ -118,7 +154,7 @@ function Login(props) {
                 errors={errors}
                 field="email"
                 handleChange={handleChange}
-                handleBlur={handleBlur}
+                handleBlur={(e)=>{setFirebaseError(null); handleBlur(e)}}
                 placeholder={emailTxt}
               />
               <InputBox
@@ -128,21 +164,19 @@ function Login(props) {
                 errors={errors}
                 field="password"
                 handleChange={handleChange}
-                handleBlur={handleBlur}
+                handleBlur={(e)=>{setFirebaseError(null); handleBlur(e)}}
                 placeholder={choosePwTxt}
               />
 
               {firebaseError && <p className={ERROR}>{firebaseError}</p>}
             </div>
-            <hr className="mt-4"/>
+            <hr className="mt-4" />
             <div className="flex items-center justify-between mt-4">
-              <button
-                className="px-4 py-2 text-white bg-blue-500 hover:bg-blue-400"
-                disabled={!readyToSubmit}
-                type="submit"
-              >
-                {submitTxt}
-              </button>
+              <SubmitButton
+                readyToSubmit={readyToSubmit}
+                txt={loginTxt}
+                values={values}
+              />
               <LinkTo to="/forgot" text={forgetPw} />
               <LinkTo to="/register" text={needAcctTxt} />
             </div>

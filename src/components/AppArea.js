@@ -24,7 +24,7 @@ function AppArea(props) {
     theme === "light" ? setTheme("dark") : setTheme("light")
   }
 
-  console.log("appArea ", user)
+  // console.log("appArea ", user)
 
   useEffect(() => {
     // document.body.style.backgroundSize = "cover"
