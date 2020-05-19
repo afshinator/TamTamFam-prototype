@@ -1,34 +1,33 @@
 import React from "react"
-import { Link } from "react-router-dom"
-import { useTranslation } from "react-i18next"
 import firebase from "./../../firebase"
-import useFormValidation from "./../../utils/useFormValidation"
-import validateRegistration from "./../../utils/validateRegistration"
+import { FirebaseContext } from "../../firebase"
+import { useTranslation } from "react-i18next"
 import Navi from "../Navi"
+import validateReg from "./validateReg"
+import useFormValidation from "./../../utils/useFormValidation"
+import { CardTitle, InputBox, LinkTo, SubmitButton, ERROR, PW_MIN_LENGTH } from "./misc"
 import userImg from "../../assets/icons/user.svg"
 import keyImg from "../../assets/icons/key.svg"
 
-const ERROR = "text-xs font-bold text-redSalsa"
-const PLACEHOLDER = <p className={`${ERROR} opacity-0`}>_</p>
-
 const EMPTY_FORM = {
-  name: "",
+  fname: "",
+  lname: "",
   email: "",
   password: "",
 }
 
 function Register(props) {
+  const { user } = React.useContext(FirebaseContext)
+  const [firebaseError, setFirebaseError] = React.useState(null)
   const { t } = useTranslation(["app"])
-  const createAcctTxt = t("app:auth:createAccount", "Create Account")
+  const registerTxt = t("app:auth:register", "Register").toUpperCase()
+  const registerMsg = t("app:auth:registerMsg", "Enter info")
   const fnameTxt = t("app:auth:fname", "First Name")
   const lnameTxt = t("app:auth:lname", "Last Name")
   const emailTxt = t("app:auth:email", "Email")
-  const choosePwTxt = t("app:auth:choosePw", "Choose Password")
-  const haveAcctTxt = t("app:auth:haveAccount", "Have Account?")
-  const submitTxt = t("app:btn:submit", "Submit")
-
-
-  const [firebaseError, setFirebaseError] = React.useState(null)
+  const choosePwTxt = t("app:auth:choosePw", "Choose PW")
+  const forgetPw = t("app:auth:forgetPw", "Forget pw?")
+  const haveAccountTxt = t("app:auth:haveAccount", "Have Account?")
 
   const {
     handleSubmit,
@@ -37,105 +36,111 @@ function Register(props) {
     values,
     errors,
     isSubmitting,
-  } = useFormValidation(EMPTY_FORM, validateRegistration, registerUser, t)
+  } = useFormValidation(EMPTY_FORM, validateReg, authenticateUser, t)
 
-  const readyToSubmit = !isSubmitting // && Object.keys(errors).length < 2
-
-  async function registerUser() {
-    const { name, email, password } = values
+  async function authenticateUser() {
+    const { fname, lname, email, password } = values // TODO:
 
     try {
-      const response = await firebase.register(name, email, password)
-      console.log("response ", { response })
+      const response = await firebase.register(
+        `${fname} ${lname}`,
+        email,
+        password
+      )
+      console.log("Auth response:", { response })
     } catch (err) {
-      console.error("Registration Error", err)
-      setFirebaseError(err.message)
+      console.error("Authentication Error", err)
+      // if (err.message.includes("user may have been deleted")) {
+      //   setFirebaseError(badUserTxt)
+      // } else if (err.message.includes("password is invalid")) {
+      //   setFirebaseError(badPwTxt)
+      // } else {
+      //   setFirebaseError(err.message)
+      // }
     }
   }
+
+  const readyToSubmit =
+    !user &&
+    !isSubmitting &&
+    !firebaseError &&
+    Object.keys(errors).length === 0 &&
+    values.email &&
+    values.password.length >= PW_MIN_LENGTH
 
   return (
     <>
       <Navi />
       <div className="flex flex-col-reverse self-center max-w-md mx-auto mt-12 shadow-lg sm:flex-row">
-        <div className="w-full p-4 bg-ivory">
-          <div className="text-gray-700">
-            <h2>{createAcctTxt}</h2>
-            <p className="mt-2 text-xs text-gray-base">
-              Please enter all your information to get registered
-            </p>
-          </div>
-
+        <div className="w-full p-4 bg-red-100 appCard ">
+          <CardTitle title={registerTxt}>{registerMsg}</CardTitle>
           <form onSubmit={handleSubmit} className="transition">
             <div className="mt-3">
-              <span className="flex items-center px-3 bg-gray-300">
-                <img src={userImg} className="opacity-25" alt="first name" />
-                <input
-                  className="w-full p-2 bg-gray-300"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.fname}
-                  placeholder={fnameTxt}
-                  type="text"
-                  name="fname"
-                />
-              </span>
-              {errors.fname ? (
-                <p className={ERROR}>{errors.fname}</p>
-              ) : (
-                PLACEHOLDER
-              )}
-              <span className="flex items-center px-3 bg-gray-300">
-                <img src={userImg} className="opacity-25" alt="user icon" />
-                <input
-                  className="w-full p-2 bg-gray-300"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.email}
-                  placeholder={emailTxt}
-                  type="email"
-                  name="email"
-                />
-              </span>
-              {errors.email ? (
-                <p className={ERROR}>{errors.email}</p>
-              ) : (
-                PLACEHOLDER
-              )}
-              <span className="flex items-center px-3 mt-2 bg-gray-300">
-                <img src={keyImg} className="opacity-25" alt="key icon" />
-                <input
-                  className={"w-full p-2 bg-gray-300"}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
-                  type="password"
-                  name="password"
-                  placeholder={choosePwTxt}
-                />
-              </span>
-              {errors.password ? (
-                <p className={ERROR}>{errors.password}</p>
-              ) : (
-                PLACEHOLDER
-              )}
+              <InputBox
+                src={userImg}
+                alt="user icon"
+                values={values}
+                errors={errors}
+                field="text"
+                name="fname"
+                handleChange={handleChange}
+                handleBlur={(e) => {
+                  setFirebaseError(null)
+                  handleBlur(e)
+                }}
+                placeholder={fnameTxt}
+              />
+              <InputBox
+                src={userImg}
+                alt="user icon"
+                values={values}
+                errors={errors}
+                field="text"
+                name="lname"
+                handleChange={handleChange}
+                handleBlur={(e) => {
+                  setFirebaseError(null)
+                  handleBlur(e)
+                }}
+                placeholder={lnameTxt}
+              />
+              <InputBox
+                src={userImg}
+                alt="user icon"
+                values={values}
+                errors={errors}
+                field="email"
+                handleChange={handleChange}
+                handleBlur={(e) => {
+                  setFirebaseError(null)
+                  handleBlur(e)
+                }}
+                placeholder={emailTxt}
+              />
+              <InputBox
+                src={keyImg}
+                alt="key icon"
+                values={values}
+                errors={errors}
+                field="password"
+                handleChange={handleChange}
+                handleBlur={(e) => {
+                  setFirebaseError(null)
+                  handleBlur(e)
+                }}
+                placeholder={choosePwTxt}
+              />
               {firebaseError && <p className={ERROR}>{firebaseError}</p>}
             </div>
-            <hr />
+            <hr className="mt-4" />
             <div className="flex items-center justify-between mt-4">
-              <button
-                className="px-4 py-2 text-white bg-blue-500 hover:bg-blue-400"
-                disabled={!readyToSubmit}
-                type="submit"
-              >
-                {submitTxt}
-              </button>
-
-              <Link
-                className="text-xs text-blue-400 underline-none hover:text-blue-600"
-                to="/login"
-              >
-                {haveAcctTxt}
-              </Link>
+              <SubmitButton
+                readyToSubmit={readyToSubmit}
+                txt={registerTxt}
+                values={values}
+              />
+              <LinkTo to="/forgot" text={forgetPw} />
+              <LinkTo to="/login" text={haveAccountTxt} />
             </div>
           </form>
         </div>

@@ -1,4 +1,4 @@
-export default function validateRegistration(values, t) {
+export default function validateReg(values, t) {
   let errors = {}
 
   const emailReqTxt = t("app:auth:emailRequired", "Email required")
@@ -9,13 +9,20 @@ export default function validateRegistration(values, t) {
   const invalidNameTxt = t("app:auth:invalidName", "Invalid name")
 
   // Name Errors
-  
-  if (!values.name) { // TODO: check i18n
-    errors.name = nameReqTxt
+  if (!values.fname) { // TODO: check i18n
+    errors.fname = nameReqTxt
   } else if ( 
-    !/^[^±!@£$%^&*_+§¡€#¢§¶•ªº«\\/<>?:;|=.,]{1,20}$/.test(values.name)
+    !/^[^±!@£$%^&*_+§¡€#¢§¶•ªº«\\/<>?:;|=.,]{1,20}$/.test(values.fname)
   ) {
-    errors.name = invalidNameTxt
+    errors.fname = invalidNameTxt
+  }
+
+  if (!values.lname) { // TODO: check i18n
+    errors.lname = nameReqTxt
+  } else if ( 
+    !/^[^±!@£$%^&*_+§¡€#¢§¶•ªº«\\/<>?:;|=.,]{1,20}$/.test(values.lname)
+  ) {
+    errors.lname = invalidNameTxt
   }
 
   // Email Errors

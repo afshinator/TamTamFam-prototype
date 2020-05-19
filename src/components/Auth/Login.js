@@ -1,86 +1,13 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import useFormValidation from "./../../utils/useFormValidation"
-import validateLogin from "./../../utils/validateLogin"
+import validateLogin from "./validateLogin"
 import firebase from "./../../firebase"
+import { FirebaseContext } from "../../firebase"
 import Navi from "../Navi"
+import { CardTitle, InputBox, LinkTo, SubmitButton, ERROR, PW_MIN_LENGTH } from "./misc"
 import userImg from "../../assets/icons/user.svg"
 import keyImg from "../../assets/icons/key.svg"
-
-const PW_MIN_LENGTH = 6
-const ERROR = "text-xs font-bold text-intlOrange"
-const PLACEHOLDER = <p className={`${ERROR} opacity-0`}>_</p>
-
-const CardTitle = (props) => {
-  return (
-    <div className="mb-6">
-      <h2 className="text-xl">{props.title}</h2>
-      <p className="text-sm ">{props.children}</p>
-    </div>
-  )
-}
-
-const InputBox = (props) => {
-  const [hasFocus, setFocus] = React.useState(false)
-  const classes = `${
-    hasFocus ? "border-intlOrange" : "border-transparent"
-  } box-content border-2 flex items-center mt-4 bg-ivory`
-  return (
-    <>
-      <span className={classes}>
-        <img src={props.src} className="opacity-25 " alt={props.alt} />
-        <input
-          className={"w-full p-2"}
-          onFocus={() => {
-            setFocus(true)
-          }}
-          onChange={props.handleChange}
-          onBlur={(e) => {
-            props.handleBlur(e)
-            setFocus(false)
-          }}
-          value={props.values[props.field]}
-          type={props.field}
-          name={props.field}
-          placeholder={props.placeholder}
-        />
-      </span>
-      <span>
-        {props.errors[props.field] ? (
-          <p className={ERROR}>{props.errors[props.field]}</p>
-        ) : (
-          PLACEHOLDER
-        )}
-      </span>
-    </>
-  )
-}
-
-const LinkTo = (props) => {
-  return (
-    <Link
-      className="text-sm text-rifleGreen underline-none hover:text-bistre"
-      to={props.to}
-    >
-      {props.text}
-    </Link>
-  )
-}
-
-const SubmitButton = (props) => {
-  const classes = `${
-    props.readyToSubmit
-      ? "bg-sandyBrown hover:bg-outOrange"
-      : "cursor-not-allowed bg-manatee"
-  } px-4 py-2 text-white`
-
-  return (
-    <button className={classes} disabled={!props.readyToSubmit} type="submit">
-      {props.txt}
-    </button>
-  )
-}
 
 const EMPTY_FORM = {
   email: "",
@@ -88,11 +15,13 @@ const EMPTY_FORM = {
 }
 
 function Login(props) {
+  const { user } = React.useContext(FirebaseContext)
   const { t } = useTranslation(["app"])
   const loginTxt = t("app:auth:login", "Login").toUpperCase()
   const loginMsg = t("app:auth:loginMsg", "Enter credentials")
+  const loggedInMsg = t("app:auth:alreadyLoggedIn", "A user already logged in")
   const emailTxt = t("app:auth:email", "Email")
-  const choosePwTxt = t("app:auth:choosePw", "Choose Password")
+  const enterPwTxt = t("app:auth:enterPw", "Enter Password")
   const needAcctTxt = t("app:auth:needAccount", "Need Account?")
   const forgetPw = t("app:auth:forgetPw", "Forget pw?")
   const badPwTxt = t("app:auth:badPw", "Bad Pw")
@@ -114,22 +43,21 @@ function Login(props) {
 
     try {
       const response = await firebase.login(email, password)
-      console.log("response ", { response })
+      console.log("Auth response:", { response })
     } catch (err) {
       console.error("Authentication Error", err)
-      if ( err.message.includes('user may have been deleted')) {
+      if (err.message.includes("user may have been deleted")) {
         setFirebaseError(badUserTxt)
-      }
-      else if ( err.message.includes('password is invalid')) {
+      } else if (err.message.includes("password is invalid")) {
         setFirebaseError(badPwTxt)
-      }
-      else {
+      } else {
         setFirebaseError(err.message)
       }
     }
   }
 
   const readyToSubmit =
+    !user &&
     !isSubmitting &&
     !firebaseError &&
     Object.keys(errors).length === 0 &&
@@ -142,9 +70,8 @@ function Login(props) {
       <div className="flex flex-col-reverse self-center max-w-md mx-auto mt-12 shadow-lg sm:flex-row">
         <div className="w-full p-4 bg-red-100 appCard ">
           <CardTitle title={loginTxt}>
-            {loginMsg}
+            {user ? loggedInMsg : loginMsg}
           </CardTitle>
-
           <form onSubmit={handleSubmit} className="transition">
             <div className="mt-3">
               <InputBox
@@ -154,8 +81,12 @@ function Login(props) {
                 errors={errors}
                 field="email"
                 handleChange={handleChange}
-                handleBlur={(e)=>{setFirebaseError(null); handleBlur(e)}}
+                handleBlur={(e) => {
+                  setFirebaseError(null)
+                  handleBlur(e)
+                }}
                 placeholder={emailTxt}
+                disabled={user}
               />
               <InputBox
                 src={keyImg}
@@ -164,8 +95,12 @@ function Login(props) {
                 errors={errors}
                 field="password"
                 handleChange={handleChange}
-                handleBlur={(e)=>{setFirebaseError(null); handleBlur(e)}}
-                placeholder={choosePwTxt}
+                handleBlur={(e) => {
+                  setFirebaseError(null)
+                  handleBlur(e)
+                }}
+                placeholder={enterPwTxt}
+                disabled={user}
               />
 
               {firebaseError && <p className={ERROR}>{firebaseError}</p>}
