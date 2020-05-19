@@ -6,7 +6,7 @@ import firebase from "./../../firebase"
 import { FirebaseContext } from "../../firebase"
 import Navi from "../Navi"
 import { CardTitle, InputBox, LinkTo, SubmitButton, ERROR, PW_MIN_LENGTH } from "./misc"
-import userImg from "../../assets/icons/user.svg"
+import envelopeImg from "../../assets/icons/envelope.svg"
 import keyImg from "../../assets/icons/key.svg"
 
 const EMPTY_FORM = {
@@ -75,8 +75,8 @@ function Login(props) {
           <form onSubmit={handleSubmit} className="transition">
             <div className="mt-3">
               <InputBox
-                src={userImg}
-                alt="user icon"
+                src={envelopeImg}
+                alt="email address"
                 values={values}
                 errors={errors}
                 field="email"
@@ -90,7 +90,7 @@ function Login(props) {
               />
               <InputBox
                 src={keyImg}
-                alt="key icon"
+                alt="password"
                 values={values}
                 errors={errors}
                 field="password"

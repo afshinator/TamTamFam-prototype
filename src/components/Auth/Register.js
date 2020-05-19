@@ -7,6 +7,7 @@ import validateReg from "./validateReg"
 import useFormValidation from "./../../utils/useFormValidation"
 import { CardTitle, InputBox, LinkTo, SubmitButton, ERROR, PW_MIN_LENGTH } from "./misc"
 import userImg from "../../assets/icons/user.svg"
+import envelopeImg from "../../assets/icons/envelope.svg"
 import keyImg from "../../assets/icons/key.svg"
 
 const EMPTY_FORM = {
@@ -105,8 +106,8 @@ function Register(props) {
                 placeholder={lnameTxt}
               />
               <InputBox
-                src={userImg}
-                alt="user icon"
+                src={envelopeImg}
+                alt="email address"
                 values={values}
                 errors={errors}
                 field="email"
@@ -119,7 +120,7 @@ function Register(props) {
               />
               <InputBox
                 src={keyImg}
-                alt="key icon"
+                alt="password"
                 values={values}
                 errors={errors}
                 field="password"
