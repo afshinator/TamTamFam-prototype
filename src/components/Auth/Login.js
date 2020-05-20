@@ -5,7 +5,14 @@ import validateLogin from "./validateLogin"
 import firebase from "./../../firebase"
 import { FirebaseContext } from "../../firebase"
 import Navi from "../Navi"
-import { CardTitle, InputBox, LinkTo, SubmitButton, ERROR, PW_MIN_LENGTH } from "./misc"
+import {
+  CardTitle,
+  InputBox,
+  LinkTo,
+  SubmitButton,
+  ERROR,
+  PW_MIN_LENGTH,
+} from "./misc"
 import envelopeImg from "../../assets/icons/envelope.svg"
 import keyImg from "../../assets/icons/key.svg"
 
@@ -64,11 +71,13 @@ function Login(props) {
     values.email &&
     values.password.length >= PW_MIN_LENGTH
 
+  console.log("errs ", errors, values)
+
   return (
     <>
       <Navi />
       <div className="flex flex-col-reverse self-center max-w-md mx-auto mt-12 shadow-lg sm:flex-row">
-        <div className="w-full p-4 bg-red-100 appCard ">
+        <div className="w-full p-4 bg-red-100 rounded-sm appCard ">
           <CardTitle title={loginTxt}>
             {user ? loggedInMsg : loginMsg}
           </CardTitle>

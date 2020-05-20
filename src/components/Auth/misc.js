@@ -31,7 +31,7 @@ export const InputBox = (props) => {
   const [hasFocus, setFocus] = React.useState(false)
   const classes = `${
     hasFocus ? "border-intlOrange" : "border-transparent"
-  } box-content border-2 flex items-center mt-4 bg-ivory`
+  } rounded-sm box-content border-2 flex items-center mt-4 bg-ivory`
 
   return (
     <>
