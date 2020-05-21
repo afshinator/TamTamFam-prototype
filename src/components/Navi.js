@@ -38,55 +38,54 @@ function Navi(props) {
         </button>
       </div>
 
-      {/* {menuToggle ? ( */}
-      <div
-        className="flex-grow hidden w-full pt-6 lg:flex lg:items-center lg:w-auto lg:block lg:pt-0"
-        id="nav-content"
-      >
-        <ul className="items-center justify-end flex-1 list-reset lg:flex">
-          <li className="mr-3">
-            <NavLink
-              className="inline-block px-4 py-2 text-white no-underline"
-              to="#"
-            >
-              Active
-            </NavLink>
-          </li>
-          {user && (
+      {menuToggle ? (
+        <div
+          className="flex-grow hidden w-full pt-6 lg:flex lg:items-center lg:w-auto lg:block lg:pt-0"
+          id="nav-content"
+        >
+          <ul className="items-center justify-end flex-1 list-reset lg:flex">
             <li className="mr-3">
-              <NavLink to="/create" className="k">
-                some page
+              <NavLink
+                className="inline-block px-4 py-2 text-white no-underline"
+                to="#"
+              >
+                Active
               </NavLink>
             </li>
-          )}
+            {user && (
+              <li className="mr-3">
+                <NavLink to="/create" className="k">
+                  some page
+                </NavLink>
+              </li>
+            )}
 
-          <li className="mr-3">
-            <NavLink
-              className="inline-block px-4 py-2 no-underline text-grey-dark hover:text-grey-lighter hover:text-underline"
-              to="#"
-            >
-              link
-            </NavLink>
-          </li>
-          {user ? (
-            <>
-              <div className="mx-3">{user.displayName}</div>
-              <div className="divider">|</div>
-              <div className="mx-3" onClick={() => firebase.logout()}>
-                logout
-              </div>
-            </>
-          ) : (
-            <NavLink to="/login" className="mx-3">
-              login
-            </NavLink>
-          )}
-        </ul>
-      </div>
-      {/* ) : null} */}
+            <li className="mr-3">
+              <NavLink
+                className="inline-block px-4 py-2 no-underline text-grey-dark hover:text-grey-lighter hover:text-underline"
+                to="#"
+              >
+                link
+              </NavLink>
+            </li>
+            {user ? (
+              <>
+                <div className="mx-3">{user.displayName}</div>
+                <div className="divider">|</div>
+                <div className="mx-3" onClick={() => firebase.logout()}>
+                  logout
+                </div>
+              </>
+            ) : (
+              <NavLink to="/login" className="mx-3">
+                login
+              </NavLink>
+            )}
+          </ul>
+        </div>
+      ) : null}
     </nav>
   )
-
 }
 
 export default withRouter(Navi)
