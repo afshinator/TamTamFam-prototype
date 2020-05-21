@@ -8,9 +8,9 @@ function useFormValidation(initialState, validate, authenticate, t) {
   React.useEffect(() => {
     if (isSubmitting) {
       const noErrors = Object.keys(errors).length === 0
-      if (noErrors ) {
+      if (noErrors) {
         authenticate()
-        console.log("authenticated", values)
+        // console.log("authenticated", values)
         setSubmitting(false)
       } else {
         console.log("errors trying to authenticate", errors)

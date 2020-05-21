@@ -30,6 +30,7 @@ function Register(props) {
   const { t } = useTranslation(["app"])
   const registerTxt = t("app:auth:register", "Register").toUpperCase()
   const registerMsg = t("app:auth:registerMsg", "Enter info")
+  const loggedInMsg = t("app:auth:alreadyLoggedIn", "A user already logged in")
   const fnameTxt = t("app:auth:fname", "First Name")
   const lnameTxt = t("app:auth:lname", "Last Name")
   const emailTxt = t("app:auth:email", "Email")
@@ -55,9 +56,9 @@ function Register(props) {
         email,
         password
       )
-      console.log("Auth response:", { response })
+      console.log("Reg response:", { response })
     } catch (err) {
-      console.error("Authentication Error", err)
+      console.error("Reg Error", err)
       // if (err.message.includes("user may have been deleted")) {
       //   setFirebaseError(badUserTxt)
       // } else if (err.message.includes("password is invalid")) {
@@ -81,7 +82,9 @@ function Register(props) {
       <Navi />
       <div className="flex flex-col-reverse self-center max-w-md mx-auto mt-12 shadow-lg sm:flex-row">
         <div className="w-full p-4 bg-red-100 rounded-sm appCard ">
-          <CardTitle title={registerTxt}>{registerMsg}</CardTitle>
+          <CardTitle title={registerTxt}>
+            {user ? loggedInMsg : registerMsg}
+          </CardTitle>
           <form onSubmit={handleSubmit} className="transition">
             <div className="mt-3">
               <InputBox
@@ -97,6 +100,7 @@ function Register(props) {
                   handleBlur(e)
                 }}
                 placeholder={fnameTxt}
+                disabled={user}
               />
               <InputBox
                 src={userImg}
@@ -111,6 +115,7 @@ function Register(props) {
                   handleBlur(e)
                 }}
                 placeholder={lnameTxt}
+                disabled={user}
               />
               <InputBox
                 src={envelopeImg}
@@ -124,6 +129,7 @@ function Register(props) {
                   handleBlur(e)
                 }}
                 placeholder={emailTxt}
+                disabled={user}
               />
               <InputBox
                 src={keyImg}
@@ -137,6 +143,7 @@ function Register(props) {
                   handleBlur(e)
                 }}
                 placeholder={choosePwTxt}
+                disabled={user}
               />
               {firebaseError && <p className={ERROR}>{firebaseError}</p>}
             </div>
