@@ -16,6 +16,7 @@ import {
 import userImg from "../../assets/icons/user.svg"
 import envelopeImg from "../../assets/icons/envelope.svg"
 import keyImg from "../../assets/icons/key.svg"
+import ImageUpload from './../ImageUpload';
 
 const EMPTY_FORM = {
   fname: "",
@@ -147,6 +148,8 @@ function Register(props) {
               />
               {firebaseError && <p className={ERROR}>{firebaseError}</p>}
             </div>
+            <ImageUpload />
+            {/* see https://firebase.google.com/docs/auth/web/manage-users?authuser=1 */}
             <hr className="mt-4" />
             <div className="flex items-center justify-between mt-4">
               <SubmitButton
