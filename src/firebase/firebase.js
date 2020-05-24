@@ -1,30 +1,32 @@
-import app from 'firebase/app'
-import 'firebase/auth'
-import firebaseConfig from './config';
+import app from "firebase/app"
+import "firebase/auth"
+import "firebase/firestore"
+import firebaseConfig from "./config"
 
 class Firebase {
   constructor() {
-    app.initializeApp(firebaseConfig);
+    app.initializeApp(firebaseConfig)
     // firebase.analytics();
-    this.auth = app.auth();
+    this.auth = app.auth()
+    this.db = app.firestore()
   }
 
   async register(name, email, password) {
     const newUser = await this.auth.createUserWithEmailAndPassword(
       email,
       password
-    );
+    )
     return await newUser.user.updateProfile({
-      displayName: name
-    });
+      displayName: name,
+    })
   }
 
   async login(email, password) {
-    return await this.auth.signInWithEmailAndPassword(email, password);
+    return await this.auth.signInWithEmailAndPassword(email, password)
   }
 
   async logout() {
-    await this.auth.signOut();
+    await this.auth.signOut()
   }
 
   async resetPassword(email) {
@@ -32,5 +34,5 @@ class Firebase {
   }
 }
 
-const firebase = new Firebase();
-export default firebase;
+const firebase = new Firebase()
+export default firebase
