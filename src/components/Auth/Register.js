@@ -86,6 +86,7 @@ function Register(props) {
           <CardTitle title={registerTxt}>
             {user ? loggedInMsg : registerMsg}
           </CardTitle>
+        
           <form onSubmit={handleSubmit} className="transition">
             <div className="mt-3">
               <InputBox
@@ -148,6 +149,7 @@ function Register(props) {
               />
               {firebaseError && <p className={ERROR}>{firebaseError}</p>}
             </div>
+            <hr className="mt-4" />
             <ImageUpload />
             {/* see https://firebase.google.com/docs/auth/web/manage-users?authuser=1 */}
             <hr className="mt-4" />
