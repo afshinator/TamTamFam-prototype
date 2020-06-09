@@ -1,9 +1,16 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useSpring, animated } from "react-spring"
 
 import Navi from "../components/Navi"
 import HeroImg from "../assets/hero1.png"
+import img1 from "../assets/img/feature1.png"
+import img2 from "../assets/img/feature2.png"
+import img3 from "../assets/img/feature3.png"
+import img4 from "../assets/img/feature4.png"
+import img5 from "../assets/img/feature5.png"
+import img6 from "../assets/img/feature6.png"
 
 export default function Landing() {
   const { t } = useTranslation(["landing"])
@@ -25,12 +32,22 @@ export default function Landing() {
             </h2>
             <p className="mb-8 leading-relaxed">{heroMsgTxt}</p>
             <div className="flex justify-center">
-              <button className="inline-flex px-6 py-2 text-lg text-white bg-orange-500 border-0 rounded focus:outline-none hover:bg-orange-600">
-                Register
-              </button>
-              <button className="inline-flex px-12 py-2 ml-4 text-lg text-gray-700 bg-gray-200 border-0 rounded focus:outline-none hover:bg-gray-300">
-                Login
-              </button>
+              <Link to="/register">
+                <button
+                  className="inline-flex px-6 py-2 text-lg text-white bg-orange-500 border-0 rounded focus:outline-none hover:bg-orange-600"
+                  type="button"
+                >
+                  Register
+                </button>
+              </Link>
+              <Link to="/login">
+                <button
+                  className="inline-flex px-12 py-2 ml-4 text-lg text-gray-700 bg-gray-200 border-0 rounded focus:outline-none hover:bg-gray-300"
+                  type="button"
+                >
+                  Login
+                </button>
+              </Link>
             </div>
           </div>
           <div className="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
@@ -60,7 +77,7 @@ export default function Landing() {
                 <img
                   alt="gallery"
                   className="absolute inset-0 object-cover object-center w-full h-full"
-                  src="https://dummyimage.com/600x360"
+                  src={img1}
                 />
                 <div className="relative z-10 w-full px-8 py-10 bg-white border-4 border-gray-200 opacity-0 hover:opacity-100">
                   <h2 className="mb-1 text-sm font-medium tracking-widest text-orange-500 title-font">
@@ -81,7 +98,7 @@ export default function Landing() {
                 <img
                   alt="gallery"
                   className="absolute inset-0 object-cover object-center w-full h-full"
-                  src="https://dummyimage.com/601x361"
+                  src={img2}
                 />
                 <div className="relative z-10 w-full px-8 py-10 bg-white border-4 border-gray-200 opacity-0 hover:opacity-100">
                   <h2 className="mb-1 text-sm font-medium tracking-widest text-orange-500 title-font">
@@ -102,7 +119,7 @@ export default function Landing() {
                 <img
                   alt="gallery"
                   className="absolute inset-0 object-cover object-center w-full h-full"
-                  src="https://dummyimage.com/603x363"
+                  src={img3}
                 />
                 <div className="relative z-10 w-full px-8 py-10 bg-white border-4 border-gray-200 opacity-0 hover:opacity-100">
                   <h2 className="mb-1 text-sm font-medium tracking-widest text-orange-500 title-font">
@@ -123,7 +140,7 @@ export default function Landing() {
                 <img
                   alt="gallery"
                   className="absolute inset-0 object-cover object-center w-full h-full"
-                  src="https://dummyimage.com/602x362"
+                  src={img4}
                 />
                 <div className="relative z-10 w-full px-8 py-10 bg-white border-4 border-gray-200 opacity-0 hover:opacity-100">
                   <h2 className="mb-1 text-sm font-medium tracking-widest text-orange-500 title-font">
@@ -144,7 +161,7 @@ export default function Landing() {
                 <img
                   alt="gallery"
                   className="absolute inset-0 object-cover object-center w-full h-full"
-                  src="https://dummyimage.com/605x365"
+                  src={img5}
                 />
                 <div className="relative z-10 w-full px-8 py-10 bg-white border-4 border-gray-200 opacity-0 hover:opacity-100">
                   <h2 className="mb-1 text-sm font-medium tracking-widest text-orange-500 title-font">
@@ -165,7 +182,7 @@ export default function Landing() {
                 <img
                   alt="gallery"
                   className="absolute inset-0 object-cover object-center w-full h-full"
-                  src="https://dummyimage.com/606x366"
+                  src={img6}
                 />
                 <div className="relative z-10 w-full px-8 py-10 bg-white border-4 border-gray-200 opacity-0 hover:opacity-100">
                   <h2 className="mb-1 text-sm font-medium tracking-widest text-orange-500 title-font">
