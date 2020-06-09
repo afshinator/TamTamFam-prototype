@@ -15,6 +15,7 @@ import ForgotPassword from "./Auth/ForgotPassword"
 import useAuth from "./Auth/useAuth"
 import firebase, { FirebaseContext } from "../firebase"
 import LandingPage from "../pages/Landing"
+import LandingBak from "../pages/Landing2"
 
 function AppArea(props) {
   // const {  } = props
@@ -39,8 +40,9 @@ function AppArea(props) {
       <BrowserRouter>
         <FirebaseContext.Provider value={{ user, firebase }}>
           <Switch>
-            {/* <Route exact path="/" render={() => <Redirect to="/landing" />} /> */}
+            <Route exact path="/" render={() => <Redirect to="/landing" />} />
             <Route path="/landing" component={LandingPage} />
+            <Route path="/landingold" component={LandingBak} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/forgot" component={ForgotPassword} />

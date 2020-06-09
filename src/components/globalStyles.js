@@ -17,7 +17,8 @@ export const GlobalStyles = createGlobalStyle`
     src: url(${openSansSBI});
   }
   h1, h2, h3 {
-    font-family: "OpenSans-SemiBoldItalic";
+    /* font-family: "OpenSans-SemiBoldItalic"; */
+    font-family: "Andika-Regular";
   }
   body {
     background: ${({ theme }) => theme.body};
