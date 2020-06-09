@@ -7,6 +7,11 @@ import HeroImg from "../assets/hero1.png"
 
 export default function Landing() {
   const { t } = useTranslation(["landing"])
+  const heroTitleTxt = t(
+    "landing:hero:title",
+    "Social Network for the Dance & Drum Community"
+  )
+  const heroMsgTxt = t("landing:hero:msg", "Coming soon...")
 
   return (
     <>
@@ -15,19 +20,10 @@ export default function Landing() {
         <div className="container flex flex-col items-center px-5 py-12 mx-auto md:flex-row">
           <div className="flex flex-col items-center mb-16 text-center lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0">
             <h2 className="mb-4 text-3xl font-medium sm:text-4xl">
-              A Social Network for the
-              <br className="hidden lg:inline-block" />
-              Drum and Dance Community
+              {heroTitleTxt}
+              {/* <br className="hidden lg:inline-block" /> */}
             </h2>
-            <p className="mb-8 leading-relaxed">
-              Welcome. We've got a lot of good things in the works. Our hope is
-              to build an online place where people who share our love and
-              practice of these arts can communicate with social media tools.
-              <br />
-              <br />
-              We'll roll out the first version soon and keep adding as time goes
-              on.
-            </p>
+            <p className="mb-8 leading-relaxed">{heroMsgTxt}</p>
             <div className="flex justify-center">
               <button className="inline-flex px-6 py-2 text-lg text-white bg-orange-500 border-0 rounded focus:outline-none hover:bg-orange-600">
                 Register

@@ -1,6 +1,10 @@
 {
-  "heroMsg" : "Online network for the dance and drum community. Join the fam, book a jam, use your online cam.",
-  "topcards" : {
+  "hero": {
+    "title": "A Social Network for the Drum and Dance Community",
+    "msg": "Welcome. We've got a lot of good things in the works. Our hope is to build an online place where people who share our love and practice of these arts can communicate with social media tools.  We'll roll out the first version soon and keep adding as time goes on."
+  },
+  "heroMsg": "Online network for the dance and drum community. Join the fam, book a jam, use your online cam.",
+  "topcards": {
     "title1": "One Destination",
     "title2": "Drummmers and Dancers",
     "title3": "Community",
