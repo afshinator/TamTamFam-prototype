@@ -17,12 +17,16 @@ export default function Landing() {
       target,
       // If you'd like to initialize any props on setup, you can do so here.
       props: {
-        src: "https://www.youtube.com/watch?v=jxJcqPUA53w",
+        src: "/src/assets/music.mp3",
         plugins: [Boot],
         providers: [FileProvider],
       },
     })
+    const off = player.$on("mount", () => {
+      // Interact with the player and plugins here.
+    })
     return () => {
+      off()
       player.$destroy()
     }
   }, [])
