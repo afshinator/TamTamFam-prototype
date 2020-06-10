@@ -1,4 +1,5 @@
 import React from "react"
+import { Redirect } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import useFormValidation from "./../../utils/useFormValidation"
 import validateLogin from "./validateLogin"
@@ -35,6 +36,7 @@ function Login(props) {
   const badUserTxt = t("app:auth:badUser", "Bad User")
 
   const [firebaseError, setFirebaseError] = React.useState(null)
+  const [justLoggedIn, setJustLoggedIn] = React.useState(false)
 
   const {
     handleSubmit,
@@ -51,6 +53,7 @@ function Login(props) {
     try {
       const response = await firebase.login(email, password)
       console.log("Auth response:", { response })
+      setJustLoggedIn(true)
     } catch (err) {
       console.error("Authentication Error", err)
       if (err.message.includes("user may have been deleted")) {
@@ -71,8 +74,11 @@ function Login(props) {
     values.email &&
     values.password.length >= PW_MIN_LENGTH
 
-  console.log("errs ", errors, values)
+  // console.log("errs ", errors, values)
 
+  if (justLoggedIn === true) {
+    return <Redirect to="/dashboard" />
+  }
   return (
     <>
       <Navi />

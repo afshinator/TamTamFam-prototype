@@ -16,6 +16,7 @@ import useAuth from "./Auth/useAuth"
 import firebase, { FirebaseContext } from "../firebase"
 import LandingPage from "../pages/Landing"
 import LandingBak from "../pages/Landing2"
+import Dashboard from "../pages/Dashboard"
 
 function AppArea(props) {
   // const {  } = props
@@ -46,6 +47,7 @@ function AppArea(props) {
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/forgot" component={ForgotPassword} />
+            <Route path="/dashboard" component={Dashboard} />
           </Switch>
           <ThemeToggler theme={theme} toggleTheme={toggleTheme} />
         </FirebaseContext.Provider>
