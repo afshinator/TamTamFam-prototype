@@ -9,6 +9,7 @@ import Emoji from 'a11y-react-emoji'
 import styled, { css } from 'styled-components'
 import Navi from "../components/Navi"
 import MediaPlayer from "../components/MediaPlayer"
+import TopNavBar from "../components/TopNavBar"
 
 const StyledEmoji = styled(({ isSpinning, ...props }) => <Emoji {...props} />)`
     font-size: 32px;
@@ -31,6 +32,7 @@ export default function Landing() {
   return (
     <>
       <Navi />
+      <TopNavBar />
       <div id="playerTarget" className="w-1/2 h-48"></div>
       <Draggable
         axis="both"
