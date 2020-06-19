@@ -26,8 +26,8 @@ export const GlobalStyles = createGlobalStyle`
     font-family: "OpenSans-Regular";
     transition: all 0.50s linear;
   }
-  nav {
-    background: ${({ theme }) => theme.nav};
+  header {
+    background:  ${({ theme }) => theme.header};
   }
   .appCard {
     background: ${({ theme }) => theme.cardBkgd};

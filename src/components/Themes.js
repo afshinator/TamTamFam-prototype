@@ -5,7 +5,7 @@ const colors = require("../tailwind.config")
 
 export const lightTheme = {
   body: colors['manatee'],
-  nav: colors['periwinkle'],
+  header: colors['periwinkle'],
   text: colors['oxfordBlue'],
   cardBkgd: colors['periwinkle'],
   cardInput: colors['ivory'],
@@ -14,7 +14,7 @@ export const lightTheme = {
 
 export const darkTheme = {
   body: colors['graniteGrey'],
-  nav: colors['darkLava'],
+  header: colors['darkLava'],
   text: colors['ivory'],
   cardBkgd: colors['khaki'],
   cardInput: colors['ivory'],
