@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
 
 // import styled from "styled-components"
 import { ThemeProvider } from "styled-components"
-import { GlobalStyles } from "./GlobalStyles"
+import { GlobalStyles } from "./globalStyles"
 import { lightTheme, darkTheme } from "./Themes"
 import ThemeToggler from "./ThemeToggler"
 
